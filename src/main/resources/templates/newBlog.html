@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>NewBlog</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"
+          href="/css/style.css"/>
+    <link rel="stylesheet" th:href="@{/css/editormd/css/editormd.css}"
+          href="/css/editormd/css/editormd.css"/>
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="top" style="width:100%;">
+    <div id="blogTitle" th:name="blogTitle"style="width: 80%;float: left">
+        <input id="title" th:type="text" placeholder="欢迎使用MarkDown编辑器！" style="width: 100%;font-size: 25px">
+    </div>
+    <div id="menu" style="width: 20%;float:left;text-align: center;">
+        <div id="submit" >
+            <button id="submitBtn" th:value="提交文章" style="font-size: 20px">submit</button>
+        </div>
+    </div>
+</div>
+<div class="editormd" id="test-editormd">
+    <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc" id="content"></textarea>
+    <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
+    <textarea class="editormd-html-textarea" name="editormd-html-textarea" id="htmlContent"></textarea>
+</div>
+</body>
+<script th:src="@{/js/jquery/jquery-3.3.1.min.js}" src="/js/jquery/jquery-3.3.1.min.js"></script>
+<script th:src="@{/js/editormd/js/editormd.js}" src="/js/editormd/js/editormd.js"></script>
+<script th:src="@{/js/newBlog.js}" src="/js/newBlog.js"></script>
+<script type="text/javascript">
+    $(function() {
+        editormd("test-editormd", {
+            width   : "90%",
+            height  : 640,
+            syncScrolling : "single",
+            //你的lib目录的路径，我这边用JSP做测试的
+            tocm : true, // Using [TOCM]
+            tex : true, // 开启科学公式TeX语言支持，默认关闭
+            flowChart : true, // 开启流程图支持，默认关闭
+            path    : "/editormd/lib/",
+            //这个配置在simple.html中并没有，但是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单。
+            saveHTMLToTextarea : true
+        });
+    });
+</script>
+</html>

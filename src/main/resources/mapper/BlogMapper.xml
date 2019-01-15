@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liveus.dao.BlogMapper">
+  <resultMap id="BaseResultMap" type="com.liveus.domain.Blog">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="uploadTime" jdbcType="TIMESTAMP" property="uploadtime" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="readSum" jdbcType="INTEGER" property="readsum" />
+    <result column="isfinished" jdbcType="TINYINT" property="isfinished" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="html" jdbcType="LONGVARCHAR" property="html" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, title, summary,content,html
+  </sql>
+
+  <insert id="insertBlog" parameterType="com.liveus.domain.Blog">
+    insert into blog (title, summary,content,html
+      )
+    values (#{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{html,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <select id="getAllBlogs" parameterType="string" resultType="com.liveus.domain.Blog">
+     SELECT * FROM BLOG where isfinished = 1 order by uploadTime
+  </select>
+
+  <select id="getBlogById" parameterType="int" resultType="com.liveus.domain.Blog">
+     SELECT * FROM BLOG where isfinished = 1 and id = #{id,jdbcType =INTEGER}
+  </select>
+
+</mapper>
