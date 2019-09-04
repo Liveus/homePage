@@ -14,6 +14,7 @@ public class ContainerConfig {
         return new WebServerFactoryCustomizer<ConfigurableWebServerFactory>() {
             @Override
             public void customize(ConfigurableWebServerFactory container) {
+                //500错误转到/error
                 container.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/500"));
             }
         };

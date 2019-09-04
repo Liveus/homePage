@@ -222,6 +222,7 @@ public class AESUtils {
 
     public static void main(String[] args) {
         String password = AESEncode("shen0410");
+        System.out.println(AESDecode(password));
         System.out.println(password);
     }
 }

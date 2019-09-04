@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liveus.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.liveus.domain.Message">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="messagetimestamp" jdbcType="TIMESTAMP" property="messagetimestamp" />
+    <result column="context" jdbcType="LONGVARCHAR" property="context" />
+  </resultMap>
+
+  <insert id="insert" parameterType="com.liveus.domain.Message">
+    INSERT INTO MESSAGE SET ip = #{ip,jdbcType =VARCHAR },messagetimestamp = #{messagetimestamp,jdbcType = TIMESTAMP},context = #{context,jdbcType = LONGVARCHAR};
+  </insert>
+
+  <select id="selectAll" resultType="com.liveus.domain.Message">
+    SELECT * from  MESSAGE ORDER BY TIMESTAMP
+  </select>
+
+  <select id="ipmonitoring" resultType="string" parameterType="string">
+    SELECT messagetimestamp from Message WHERE IP = #{ip,jdbcType = VARCHAR } ORDER BY messagetimestamp DESC LIMIT 1;
+  </select>
+
+</mapper>

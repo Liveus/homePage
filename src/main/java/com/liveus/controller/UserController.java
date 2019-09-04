@@ -3,6 +3,8 @@ package com.liveus.controller;
 import com.liveus.domain.Configbean2;
 import com.liveus.domain.User;
 import com.liveus.service.UserService;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.junit.After;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,37 +24,33 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    RedisTemplate redisTemplate;
+
     @Value(value="${com.liveus.userName}")
     private String userName;
-
     @Value(value="${com.liveus.passWord}")
     private String passWord;
-
     @Value(value = "${com.liveus.randomValue}")
     private String randomValue;
-
     @Value(value = "${com.liveus.uuid}")
     private String uuid;
-
     @Value(value = "${spring.datasource.url}")
     private String url;
-
-    @Value(value = "${spring.datasource.password}")
-    private String pad;
-
-    @Resource
-    StringRedisTemplate stringRedisTemplate;
     @Resource
     UserService userService;
-    @Resource
-    RedisTemplate redisTemplate;
+
+    @Autowired
+    private Configbean2 configbean2;
 
     /**
      *登录操作
      **/
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> login(HttpServletRequest request, HttpServletResponse response){
+    public Map<String,Object> login(HttpServletRequest request, HttpServletResponse response, HttpSession session){
         Map<String,Object> map =new HashMap<String,Object>();
         String userName=request.getParameter("userName");
         String password=request.getParameter("password");
@@ -66,32 +66,6 @@ public class UserController {
             map.put("result","0");//用户名和密码不得为空
         }
         return map;
-    }
-
-    @Autowired
-    private Configbean2 configbean2;
-
-    @RequestMapping("/uuid")
-    public String randomUuid(){
-        System.out.println(url);
-        System.out.println(pad);
-        System.out.println("".isBlank());
-        System.out.println(" Javastack ".strip());
-        System.out.println(" Javastack ".stripTrailing());
-        System.out.println(" Javastack ".stripLeading());
-        System.out.println("Java".repeat(3));
-        System.out.println("A\nB\nC".lines().count());
-        return uuid;
-    }
-
-    @RequestMapping("/randomValue")
-    public String randomValue(){
-        return randomValue;
-    }
-
-    @RequestMapping("/hello")
-    public String hello(){
-        return "hello";
     }
 
     @RequestMapping("/attribute")
@@ -128,7 +102,8 @@ public class UserController {
     @RequestMapping("/Get1")
     public void get() {
         stringRedisTemplate.opsForValue().set("test", "I'm a egg");
-        System.out.println(stringRedisTemplate.opsForValue().get("test"));
+        stringRedisTemplate.opsForList().leftPush("forlist","list1");
+        System.out.println("value");
     }
 
     @RequestMapping("/ContextLoads")
@@ -139,6 +114,21 @@ public class UserController {
         user.setPassword("zhang san");
         stringRedisTemplate.opsForValue().set("date", user.toString());
         System.out.println(stringRedisTemplate.opsForValue().get("date"));
+    }
+
+    @RequestMapping("/Redistest")
+    public void Redis(){
+        long startTime=System.currentTimeMillis();
+        for (int i=0;i<1000;i++){
+            stringRedisTemplate.opsForValue().set(String.valueOf(i) ,new Date().toString());
+        }
+        long endTime=System.currentTimeMillis();
+        System.out.println(endTime-startTime);
+    }
+
+    @AfterReturning()
+    public void doafterReturning(){
+
     }
 
 

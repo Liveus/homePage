@@ -8,10 +8,13 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="summary" jdbcType="VARCHAR" property="summary" />
-    <result column="uploadTime" jdbcType="TIMESTAMP" property="uploadtime" />
-    <result column="type" jdbcType="CHAR" property="type" />
-    <result column="readSum" jdbcType="INTEGER" property="readsum" />
+    <result column="uploadtime" jdbcType="TIMESTAMP" property="uploadtime" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="readsum" jdbcType="VARCHAR" property="readsum" />
     <result column="isfinished" jdbcType="TINYINT" property="isfinished" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="deletedtime" jdbcType="TIMESTAMP" property="deletedtime" />
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="html" jdbcType="LONGVARCHAR" property="html" />
   </resultMap>
@@ -26,7 +29,7 @@
     values (#{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{html,jdbcType=VARCHAR}
       )
   </insert>
-  
+
   <select id="getAllBlogs" parameterType="string" resultType="com.liveus.domain.Blog">
      SELECT * FROM BLOG where isfinished = 1 order by uploadTime
   </select>

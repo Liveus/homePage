@@ -11,7 +11,7 @@ public class MyInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         boolean flag =true;
         User user=(User)request.getSession().getAttribute("user");
-        if(null==user){
+        if(null==user){//未登录重定向到登录页
             response.sendRedirect("/user/toLogin");
             flag = false;
         }else{

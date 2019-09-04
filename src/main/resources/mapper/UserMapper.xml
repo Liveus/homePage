@@ -12,7 +12,7 @@
     <result column="profession" jdbcType="VARCHAR" property="profession" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="publicEmail" jdbcType="VARCHAR" property="publicemail" />
+    <result column="publicemail" jdbcType="VARCHAR" property="publicemail" />
   </resultMap>
   
   <select id="loginBypasswd" resultType="string">

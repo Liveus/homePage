@@ -1,4 +1,4 @@
-package com.liveus.serviceImpl;
+package com.liveus.service.serviceImpl;
 
 import com.liveus.dao.BlogMapper;
 import com.liveus.domain.Blog;
@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service("blogService")
 public class BlogServiceImpl implements BlogService {
-
 
     @Resource
     BlogMapper blogMapper;

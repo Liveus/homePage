@@ -14,7 +14,7 @@ public class AES {
 
     public static void main(String[] args){
         System.out.println(encrypt("shen0410"));
-        System.out.println(decrypt(encrypt("shen0410")));
+        System.out.println(decrypt("wBZPctmw8SxF87BS1LYeVw=="));
     }
 
     /**
@@ -59,7 +59,6 @@ public class AES {
         }
     }
 
-
     public static Key getKey(String keySeed) {
         if (keySeed == null) {
             keySeed = System.getenv("AES_SYS_KEY");
@@ -80,6 +79,4 @@ public class AES {
             throw new RuntimeException(e);
         }
     }
-
-
 }

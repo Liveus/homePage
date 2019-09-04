@@ -1,9 +1,10 @@
 package com.liveus.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "personalinfo")
-public class PersonalInfo {
+public class PersonalInfo implements Serializable {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

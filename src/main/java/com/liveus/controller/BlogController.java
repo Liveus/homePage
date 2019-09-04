@@ -3,24 +3,27 @@ package com.liveus.controller;
 import com.liveus.domain.Blog;
 import com.liveus.domain.User;
 import com.liveus.service.BlogService;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RequestMapping("/blog")
-@Controller
+@RestController
 public class BlogController {
 
     @Resource
     BlogService blogService;
 
     @RequestMapping("/newBlog")
-    public String newBlog(){
-        return "newBlog";
+    public ModelAndView newBlog(){
+        ModelAndView modelAndView = new ModelAndView("newBlog");
+        return modelAndView;
     }
 
     /**
@@ -40,6 +43,7 @@ public class BlogController {
      */
     @RequestMapping("/allBlogs")
     @ResponseBody
+    @CrossOrigin
     public List<Blog> getAllBlog(HttpServletRequest request){
         List<Blog> blogs = blogService.getBlogs((User) request.getSession().getAttribute("user"));
         return blogs;

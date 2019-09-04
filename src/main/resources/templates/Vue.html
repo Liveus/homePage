@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>模拟淘宝网菜单选择</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css" media="all">
+        body *{
+            font-size:14px;
+            margin:0;
+            padding:0;
+        }
+        #CategorySelector{
+            clear:both;
+            width:778px;
+            height:220px;
+            background-color:#FFF;
+            margin-bottom:8px;
+        }
+        #CategorySelector ul{
+            margin:0 3px 0 0;
+            padding:0;
+            border:1px solid #CCC;
+            float:left;
+            width:189px;
+            height:218px;
+            overflow:auto;
+        }
+        #CategorySelector ul.Blank{
+            background-color:#F6F6F6;
+        }
+        #CategorySelector li{
+            list-style-type:none;
+            width:auto;
+            height:20px;
+            margin:0 1px !important;
+            margin /**/:0 1px 0 -15px;
+            padding:0;
+            border:1px solid #FFF;
+            line-height:20px;
+            color:#444;
+            text-indent:3px;
+            cursor:default;
+        }
+        #CategorySelector li.Selected{
+            background-color:#CAFFC0;
+            border:1px solid #0A9800;
+            color:#006623;
+        }
+        #CategorySelector li.IsParent{
+            background-image:url(//files.jb51.net/file_images/article/201508/201581893903737.gif);
+            background-position:99% 50%;
+            background-repeat:no-repeat;
+        }
+        #CategorySelector li.RecentUsed{
+            color:#170;
+        }
+        #CategoryTitle{
+            clear:both;
+            width:778px;
+            background-color:#FFF;
+        }
+        #CategoryTitle ul{
+            float:left;
+        }
+        #CategoryTitle li{
+            margin:0 3px 0 0;
+            float:left;
+            border:1px solid #CCC;
+            width:189px;
+            color:#0063C8;
+            font-weight:bold;
+            border-bottom:0px;
+            height:23px;
+            line-height:23px;
+        }
+    </style>
+</head>
+<body>
+<div id="addr">
+    <p></p>
+</div>
+<div id="CategoryTitle">
+    <ul id="TitleContent">
+        <!--   <li>  选择宝贝类别</li> -->
+        <li>  城市</li>
+        <li>  园区</li>
+        <li>  具体地址</li>
+    </ul>
+</div>
+<div id="CategorySelector">
+
+    <!--  <ul id="Category_ItemType" class="Blank">
+    </ul> -->
+
+    <ul id="Category_GameType" class="Blank">
+    </ul>
+    <ul id="Category_GameArea" class="Blank">
+    </ul>
+    <ul id="Category_GameServer" class="Blank">
+    </ul>
+</div>
+
+<script language="javascript" type="text/javascript" id="commonjs">
+    Array.prototype.S = String.fromCharCode(2);
+    Array.prototype.in_array = function(e){
+        var re = new RegExp(this.S+e+this.S);
+        return re.test(this.S+this.join(this.S)+this.S);
+    }
+    function DataContent(){
+        this.Parent;  // Parent Tags
+        this.ParentID;
+        this.Children;  // Children Tags
+        this.ChildrenID;
+    }
+    function DataServer(){
+        this.mList = new Array();
+        this.ListCount = function(){return this.mList.length;}
+        this.GetListObj = function(n){
+            if (n<this.ListCount()) return this.mList[n];
+            return null;
+        }
+        this.Add = function(sParent,sParentID,sChildren,sChildrenID){
+            obj = new DataContent();
+            obj.Parent  = sParent;
+            obj.ParentID  = sParentID;
+            obj.Children = sChildren;
+            obj.ChildrenID = sChildrenID;
+            this.mList[this.ListCount()] = obj;
+        }
+    }
+    function getTriggerNode(e) {
+        return (document.all)?event.srcElement:e.target;
+    }
+    function getObject(objID){
+        return document.getElementById(objID);
+    }
+    function CreateList(objName,objData,objSelected){
+        var listBox = getObject(objName[0]);
+        if(!listBox) return;
+        var strOutput = "";
+        var liClass = "";
+        var id = 0;
+        var op_txt = new Array();
+        var op_val = new Array();
+        var sub_val = new Array();
+        if (objSelected[0]){
+            for(i=0;i<objData.ListCount();i++)
+                if(objData.GetListObj(i).ParentID==objSelected[0]){
+                    id = i;
+                    break;
+                }
+            if(i==objData.ListCount()){
+                listBox.innerHTML="";
+                listBox.className="Blank";
+                return false;
+            }
+        }
+        if(objName[1])
+            for(i=0;i<objName[1].ListCount();sub_val.push(objName[1].GetListObj(i++).ParentID));
+        tmpobj = objData.GetListObj(id);
+        if (tmpobj.Children.length==0){
+            for(i=0;i<objData.ListCount();op_txt.push(objData.GetListObj(i).Parent),op_val.push(objData.GetListObj(i++).ParentID));
+        }
+        else{
+            op_txt = tmpobj.Children;
+            op_val = tmpobj.ChildrenID;
+        }
+        for(i=0;i<op_txt.length;i++){
+            if(sub_val.in_array(op_val[i]))
+                liClass = "IsParent";
+            if(op_val[i] == objSelected[1]){
+                liClass += " Selected";
+            }
+            strOutput += '<li id="'+objName[0]+'__'+op_val[i]+'" class="'+liClass+'">'+op_txt[i]+'</li>';
+            liClass = '';
+        }
+        listBox.innerHTML = strOutput;
+        strOutput = "";
+        listBox.className="";
+    }
+    function changeCategoryStyle(ulID,liCurr){
+        if(lastSelectItem[ulID]){
+            lastSelectItem[ulID].className=lastSelectItem[ulID].className.replace("Selected","").replace(/\s+$/,"");
+        }
+        liCurr.className += " Selected";
+        lastSelectItem[ulID] = liCurr;
+    }
+    function changeCategory(evnt){
+        var obj = getTriggerNode(evnt);
+        var obj2 = obj;
+        if(obj2.nodeName=="DIV") return (0);
+        if(obj.nodeName != "LI")
+            obj = obj.parentNode;
+        while(obj2.nodeName != "UL")
+            obj2 = obj2.parentNode;
+        if(obj.nodeName != "LI")
+            return;
+        changeCategoryStyle(obj2.id,obj);
+        var parentID = (obj.id).split("__")[1];
+        switch(obj2.id){
+            /*  case itemtype:
+            break;*/
+            case gametype:
+                CreateList([gamearea,gameserverData],gameareaData,[parentID,0]);
+                break;
+            case gamearea:
+                CreateList([gameserver,],gameserverData,[parentID,0]);
+                break;
+        }
+    }
+    var cselect = "CategorySelector";
+    //var itemtype = "Category_ItemType";
+    var gametype = "Category_GameType";
+    var gamearea = "Category_GameArea";
+    var gameserver = "Category_GameServer";
+    var lastSelectItem = {/*itemtype:new Object(),*/gametype:new Object(),gamearea:new Object(),gameserver:new Object()};
+
+    /*var itemtypeData = new DataServer();
+    itemtypeData.Add("武器",1,[],[]);
+    itemtypeData.Add("防具",2,[],[]);*/
+
+    var gametypeData = new DataServer();
+    gametypeData.Add("上海",1,[],[]);
+    gametypeData.Add("江苏",2,[],[]);
+    gametypeData.Add("杭州",3,[],[]);
+    gametypeData.Add("成都",4,[],[]);
+
+    var gameareaData = new DataServer();
+    gameareaData.Add("上海",1,["支付宝","蚂蚁外包","口碑","盒马","虹桥阿里中心"],[1,2,3,4,5]);
+    gameareaData.Add("江苏",2,["江苏园区"],[6]);
+    gameareaData.Add("杭州",3,["杭州园区"],[7]);
+    gameareaData.Add("成都",4,["成都园区"],[8]);
+
+    var gameserverData = new DataServer();
+    gameserverData.Add("支付宝",1,["上海市浦东新区银城中路501号上海中心大厦18楼"],[1]);
+    gameserverData.Add("蚂蚁外包",2,["上海市浦东新区民生路1403号上海信息大厦30楼 3002B区"],[2]);
+    gameserverData.Add("口碑",3,["上海市浦东新区民生路1199弄 证大五道口广场1号楼28F"],[3]);
+    gameserverData.Add("盒马",4,["上海长宁区长宁路88号King88广场9楼"],[4]);
+    gameserverData.Add("虹桥阿里中心",5,["上海市闵行区申长路1398弄T3楼6F"],[5]);
+
+    gameserverData.Add("江苏园区",6,["江苏省南京市建邺区白龙江东街8号新城科技园综合体A区2栋6F"],[6]);
+    gameserverData.Add("杭州园区",7,["杭州滨江"],[7]);
+    gameserverData.Add("成都园区",8,["成都"],[8]);
+    /*CreateList([itemtype,],itemtypeData,[0,0]);*/
+    CreateList([gametype,gameareaData],gametypeData,[0,0]);
+
+    getObject(cselect).onmouseover = changeCategory;
+
+    getObject(cselect).onclick = new function(){
+        console.log(id);
+    };
+
+</script>
+</body>
+</html>

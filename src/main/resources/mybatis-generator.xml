@@ -54,32 +54,49 @@
 
         <!--生成对应表及类名 去掉Mybatis Generator生成的一堆 example-->
         <!--learnresource-->
-<!--        <table tableName="LEARN_RESOURCE" domainObjectName="LearnResource" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>-->
-<!--        <table tableName="Test" domainObjectName="Test" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>-->
-<!--        <table tableName="PersonalInfo" domainObjectName="PersonalInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+<!--        <table tableName="learnresource" domainObjectName="LearnResource" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>-->
 
         <!--博客-->
-        <table tableName="Blog" domainObjectName="Blog"
+<!--        <table tableName="Blog" domainObjectName="Blog"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true" enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true" enableDeleteByPrimaryKey="true" enableInsert="true">
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
-        </table>
+        </table>-->
+
         <!--用户-->
-<!--
-        <table tableName="User" domainObjectName="User"
+<!--        <table tableName="User" domainObjectName="User"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true" enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true" enableDeleteByPrimaryKey="true" enableInsert="true">
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
-        </table>
--->
+        </table>-->
+
+        <!--个人信息表-->
+<!--        <table tableName="Liveus" domainObjectName="Liveus"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true" enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true" enableDeleteByPrimaryKey="true" enableInsert="true">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>-->
+
+        <!--留言-->
+<!--        <table tableName="message" domainObjectName="Message"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true" enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true" enableDeleteByPrimaryKey="true" enableInsert="true">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>-->
+
+        <!--blog类型-->
+<!--        <table tableName="blogtype" domainObjectName="Blogtype"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true" enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true" enableDeleteByPrimaryKey="true" enableInsert="true">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>-->
 
     </context>
 </generatorConfiguration>

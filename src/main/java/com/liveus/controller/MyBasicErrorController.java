@@ -1,5 +1,7 @@
 package com.liveus.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
@@ -18,6 +20,8 @@ import java.util.Map;
 @Controller
 public class MyBasicErrorController extends BasicErrorController {
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     public MyBasicErrorController() {
         super(new DefaultErrorAttributes(), new ErrorProperties());
     }
@@ -35,6 +39,7 @@ public class MyBasicErrorController extends BasicErrorController {
         response.setStatus(getStatus(request).value());
         Map<String, Object> model = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
         model.put("msg", "自定义错误信息");
+        logger.info("500");
         return new ModelAndView("error/500", model);
     }
 
@@ -50,6 +55,7 @@ public class MyBasicErrorController extends BasicErrorController {
     public ResponseEntity<Map<String, Object>> error500(HttpServletRequest request) {
         Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
         HttpStatus status = getStatus(request);
+        logger.info("500+");
         return new ResponseEntity<Map<String, Object>>(body, status);
     }
 }

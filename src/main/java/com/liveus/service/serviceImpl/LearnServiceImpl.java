@@ -1,4 +1,4 @@
-package com.liveus.serviceImpl;
+package com.liveus.service.serviceImpl;
 
 
 import com.liveus.dao.LearnMapper;
