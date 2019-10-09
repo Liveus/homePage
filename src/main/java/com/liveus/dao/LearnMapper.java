@@ -1,6 +1,6 @@
 package com.liveus.dao;
 
-import com.liveus.domain.LearnResource;
+import com.liveus.pojo.entity.LearnResource;
 import com.liveus.utils.MyMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;

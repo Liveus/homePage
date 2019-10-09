@@ -1,10 +1,10 @@
 package com.liveus.controller;
 
-import com.liveus.domain.Configbean2;
-import com.liveus.domain.User;
+import com.liveus.pojo.dto.Userdto;
+import com.liveus.pojo.entity.Configbean2;
+import com.liveus.pojo.entity.User;
 import com.liveus.service.UserService;
 import org.aspectj.lang.annotation.AfterReturning;
-import org.junit.After;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 
@@ -26,6 +27,7 @@ public class UserController {
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
+
     @Autowired
     RedisTemplate redisTemplate;
 
@@ -50,14 +52,15 @@ public class UserController {
      **/
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> login(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+    @CrossOrigin
+    public Map<String,Object> login(Userdto userdto,HttpSession session){
         Map<String,Object> map =new HashMap<String,Object>();
-        String userName=request.getParameter("userName");
-        String password=request.getParameter("password");
-        if(!userName.equals("") && password!=""){
+        String userName=userdto.getUserName();
+        String password=userdto.getUserName();
+        if(!userName.equals("") && !password.equals("")){
             User user =new User(userName,password);
             if(userService.userLoginWithPasswd(user)){
-                request.getSession().setAttribute("user",user);
+                session.setAttribute("user",user);
                 map.put("result","1");//登陆成功
             }else{
                 map.put("result","2");//密码不正确

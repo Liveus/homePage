@@ -1,4 +1,4 @@
-package com.liveus.domain;
+package com.liveus.pojo.entity;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

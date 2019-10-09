@@ -2,7 +2,7 @@ package com.liveus.service.serviceImpl;
 
 
 import com.liveus.dao.LearnMapper;
-import com.liveus.domain.LearnResource;
+import com.liveus.pojo.entity.LearnResource;
 import com.liveus.service.LearnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

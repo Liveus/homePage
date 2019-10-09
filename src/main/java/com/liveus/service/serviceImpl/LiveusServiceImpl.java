@@ -1,7 +1,7 @@
 package com.liveus.service.serviceImpl;
 
 import com.liveus.dao.LiveusMapper;
-import com.liveus.domain.Liveus;
+import com.liveus.pojo.entity.Liveus;
 import com.liveus.service.LiveusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

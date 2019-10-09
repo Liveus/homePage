@@ -1,4 +1,4 @@
-package com.liveus.domain;
+package com.liveus.pojo.entity;
 
 import com.liveus.Validator.FlagValidator;
 import org.hibernate.validator.constraints.Length;

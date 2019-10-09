@@ -1,8 +1,8 @@
 package com.liveus.service.serviceImpl;
 
 import com.liveus.dao.BlogMapper;
-import com.liveus.domain.Blog;
-import com.liveus.domain.User;
+import com.liveus.pojo.entity.Blog;
+import com.liveus.pojo.entity.User;
 import com.liveus.service.BlogService;
 import org.springframework.stereotype.Service;
 

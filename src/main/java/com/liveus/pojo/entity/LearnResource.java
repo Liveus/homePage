@@ -1,4 +1,4 @@
-package com.liveus.domain;
+package com.liveus.pojo.entity;
 
 import javax.persistence.*;
 

@@ -1,6 +1,6 @@
 package com.liveus.dao;
 
-import com.liveus.domain.Blogtype;
+import com.liveus.pojo.entity.Blogtype;
 import com.liveus.utils.MyMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;

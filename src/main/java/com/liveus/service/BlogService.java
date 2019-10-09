@@ -1,7 +1,7 @@
 package com.liveus.service;
 
-import com.liveus.domain.Blog;
-import com.liveus.domain.User;
+import com.liveus.pojo.entity.Blog;
+import com.liveus.pojo.entity.User;
 
 import java.util.List;
 

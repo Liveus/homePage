@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liveus.dao.BlogMapper">
-  <resultMap id="BaseResultMap" type="com.liveus.domain.Blog">
+  <resultMap id="BaseResultMap" type="com.liveus.pojo.entity.Blog">
     <!--
       WARNING - @mbg.generated
     -->
@@ -23,18 +23,18 @@
     id, title, summary,content,html
   </sql>
 
-  <insert id="insertBlog" parameterType="com.liveus.domain.Blog">
+  <insert id="insertBlog" parameterType="com.liveus.pojo.entity.Blog">
     insert into blog (title, summary,content,html
       )
     values (#{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{html,jdbcType=VARCHAR}
       )
   </insert>
 
-  <select id="getAllBlogs" parameterType="string" resultType="com.liveus.domain.Blog">
+  <select id="getAllBlogs" parameterType="string" resultType="com.liveus.pojo.entity.Blog">
      SELECT * FROM BLOG where isfinished = 1 order by uploadTime
   </select>
 
-  <select id="getBlogById" parameterType="int" resultType="com.liveus.domain.Blog">
+  <select id="getBlogById" parameterType="int" resultType="com.liveus.pojo.entity.Blog">
      SELECT * FROM BLOG where isfinished = 1 and id = #{id,jdbcType =INTEGER}
   </select>
 

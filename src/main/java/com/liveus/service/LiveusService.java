@@ -1,6 +1,6 @@
 package com.liveus.service;
 
-import com.liveus.domain.Liveus;
+import com.liveus.pojo.entity.Liveus;
 
 public interface LiveusService {
     /**

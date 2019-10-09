@@ -1,6 +1,6 @@
 package com.liveus.service;
 
-import com.liveus.domain.User;
+import com.liveus.pojo.entity.User;
 
 public interface UserService {
 

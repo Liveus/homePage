@@ -1,6 +1,6 @@
 package com.liveus.controller;
 
-import com.liveus.domain.Liveus;
+import com.liveus.pojo.entity.Liveus;
 import com.liveus.service.LiveusService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

@@ -1,6 +1,6 @@
 package com.liveus.dao;
 
-import com.liveus.domain.Blog;
+import com.liveus.pojo.entity.Blog;
 import com.liveus.utils.MyMapper;
 
 import java.util.List;

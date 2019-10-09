@@ -1,7 +1,7 @@
 package com.liveus.controller;
 
-import com.liveus.domain.Blog;
-import com.liveus.domain.User;
+import com.liveus.pojo.entity.Blog;
+import com.liveus.pojo.entity.User;
 import com.liveus.service.BlogService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

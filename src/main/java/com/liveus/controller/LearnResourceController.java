@@ -1,6 +1,6 @@
 package com.liveus.controller;
 
-import com.liveus.domain.LearnResource;
+import com.liveus.pojo.entity.LearnResource;
 import com.liveus.service.LearnService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

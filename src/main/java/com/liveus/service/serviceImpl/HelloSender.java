@@ -1,6 +1,6 @@
 package com.liveus.service.serviceImpl;
 
-import com.liveus.domain.Blog;
+import com.liveus.pojo.entity.Blog;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

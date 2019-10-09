@@ -1,6 +1,6 @@
 package com.liveus.service;
 
-import com.liveus.domain.LearnResource;
+import com.liveus.pojo.entity.LearnResource;
 
 public interface LearnService {
     int add(LearnResource learnResource);

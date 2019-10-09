@@ -1,6 +1,4 @@
-package com.liveus.domain;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
+package com.liveus.pojo.entity;
 
 
 //@ConfigurationProperties(prefix = "com.liveus")

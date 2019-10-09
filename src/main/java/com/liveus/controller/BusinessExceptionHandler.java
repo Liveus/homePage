@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestControllerAdvice
 public class BusinessExceptionHandler {
+
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     /**

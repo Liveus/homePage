@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.liveus.dao.LiveusMapper" >
-  <resultMap id="BaseResultMap" type="com.liveus.domain.Liveus" >
+  <resultMap id="BaseResultMap" type="com.liveus.pojo.entity.Liveus" >
     <!--
       WARNING - @mbg.generated
     -->
@@ -20,7 +20,7 @@
     Pic = #{Pic},nickName = #{nickName},Github = #{Github},juejin = #{juejin},CSDN = #{CSDN},jianshu = #{jianshu},skills = #{skills}, moto = #{moto}
   </sql>
 
-  <update id="updateByPrimaryKey" parameterType="com.liveus.domain.Liveus">
+  <update id="updateByPrimaryKey" parameterType="com.liveus.pojo.entity.Liveus">
     update Liveus set Pic = #{pic,jdbcType=VARCHAR},nickName = #{nickname,jdbcType=VARCHAR},Github = #{github,jdbcType=VARCHAR},
     juejin = #{juejin,jdbcType=VARCHAR},CSDN = #{csdn,jdbcType=VARCHAR},jianshu = #{jianshu,jdbcType=VARCHAR},skills = #{skills,jdbcType=OTHER}, 
     moto = #{moto,jdbcType=VARCHAR} WHERE id = #{id,jdbcType=INTEGER};

@@ -1,6 +1,6 @@
 package com.liveus.dao;
 
-import com.liveus.domain.Message;
+import com.liveus.pojo.entity.Message;
 import com.liveus.utils.MyMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;

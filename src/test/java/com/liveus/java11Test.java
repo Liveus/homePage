@@ -1,9 +1,6 @@
 package com.liveus;
 
-import com.liveus.domain.User;
-
-import java.math.BigDecimal;
-import java.util.Arrays;
+import static java.lang.System.out;
 
 public class java11Test {
     //bigdecimal
@@ -23,12 +20,19 @@ public class java11Test {
         user.setName("qq");
         System.out.println(user.toString());*/
 
-        float a = (float) (Math.round(Float.valueOf(new String("288074"))*10000f)/ 10000f);
+/*        float a = (float) (Math.round(Float.valueOf(new String("288074"))*10000f)/ 10000f);
         System.out.println(a);
         System.out.println(Float.valueOf(new String("288074"))*10000f);
         System.out.println(Math.round(Float.valueOf(new String("288074"))*10000f));
         System.out.println(Math.round((288074f*10000f)));
-        System.out.println(288074f*10000f);
+        System.out.println(288074f*10000f);*/
 
+        String s1 = "hello​world‌";
+
+        String s2 = "helloworld";
+
+        String s3 = "helloworld";
+
+        out.println(s1.equals(s2));
     }
 }

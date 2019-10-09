@@ -1,7 +1,7 @@
 package com.liveus.service.serviceImpl;
 
 import com.liveus.dao.MessageMapper;
-import com.liveus.domain.Message;
+import com.liveus.pojo.entity.Message;
 import com.liveus.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

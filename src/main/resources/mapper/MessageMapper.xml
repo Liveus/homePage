@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liveus.dao.MessageMapper">
-  <resultMap id="BaseResultMap" type="com.liveus.domain.Message">
+  <resultMap id="BaseResultMap" type="com.liveus.pojo.entity.Message">
     <!--
       WARNING - @mbg.generated
     -->
@@ -11,11 +11,11 @@
     <result column="context" jdbcType="LONGVARCHAR" property="context" />
   </resultMap>
 
-  <insert id="insert" parameterType="com.liveus.domain.Message">
+  <insert id="insert" parameterType="com.liveus.pojo.entity.Message">
     INSERT INTO MESSAGE SET ip = #{ip,jdbcType =VARCHAR },messagetimestamp = #{messagetimestamp,jdbcType = TIMESTAMP},context = #{context,jdbcType = LONGVARCHAR};
   </insert>
 
-  <select id="selectAll" resultType="com.liveus.domain.Message">
+  <select id="selectAll" resultType="com.liveus.pojo.entity.Message">
     SELECT * from  MESSAGE ORDER BY TIMESTAMP
   </select>
 

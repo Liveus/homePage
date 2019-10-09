@@ -1,6 +1,6 @@
 package com.liveus.controller;
 
-import com.liveus.domain.Message;
+import com.liveus.pojo.entity.Message;
 import com.liveus.service.MessageService;
 import com.liveus.utils.DateTransfrom;
 import com.liveus.utils.IpDetective;

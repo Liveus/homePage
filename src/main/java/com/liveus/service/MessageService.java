@@ -1,6 +1,6 @@
 package com.liveus.service;
 
-import com.liveus.domain.Message;
+import com.liveus.pojo.entity.Message;
 
 import java.util.List;
 

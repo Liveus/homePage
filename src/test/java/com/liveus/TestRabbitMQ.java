@@ -1,6 +1,6 @@
 package com.liveus;
 
-import com.liveus.domain.Blog;
+import com.liveus.pojo.entity.Blog;
 import com.liveus.service.serviceImpl.HelloSender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
