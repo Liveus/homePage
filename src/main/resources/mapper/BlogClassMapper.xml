@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.liveus.dao.BlogtypeMapper">
+<mapper namespace="com.liveus.dao.BlogClassMapper">
   <resultMap id="BaseResultMap" type="com.liveus.pojo.entity.Blogtype">
     <!--
       WARNING - @mbg.generated
@@ -12,7 +12,15 @@
     <result column="createdtime" jdbcType="TIMESTAMP" property="createdtime" />
     <result column="deletedtime" jdbcType="TIMESTAMP" property="deletedtime" />
   </resultMap>
-  <insert id="insertNewBlog" parameterType="string" >
-    INSERT INTO blogtype(typename) value (#{type,jdbcType = VARCHAR });
+
+  <insert id="insertNewBlog" >
+    INSERT INTO blogclass(typename,blogsum,createdtime)
+    VALUE (#{type,jdbcType = VARCHAR },#{blogsum,jdbcType = INTEGER },sysdate());
   </insert>
+
+  <select id="getAllType" resultType="com.liveus.pojo.vo.BlogtypeVo">
+    SELECT id,typename from blogclass
+    WHERE deleted = 0
+    order by  createdtime;
+  </select>
 </mapper>

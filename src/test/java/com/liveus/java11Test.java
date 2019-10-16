@@ -31,8 +31,7 @@ public class java11Test {
 
         String s2 = "helloworld";
 
-        String s3 = "helloworld";
-
         out.println(s1.equals(s2));
+
     }
 }

@@ -25,8 +25,14 @@ public class Blogtype {
      */
     private Byte deleted;
 
+    /**
+     * 创建时间
+     */
     private Date createdtime;
 
+    /**
+     * 删除时间
+     */
     private Date deletedtime;
 
     /**

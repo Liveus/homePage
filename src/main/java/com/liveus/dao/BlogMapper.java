@@ -2,6 +2,7 @@ package com.liveus.dao;
 
 import com.liveus.pojo.entity.Blog;
 import com.liveus.utils.MyMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,5 +11,9 @@ public interface BlogMapper extends MyMapper<Blog> {
 
     Blog getBlogById(int id);
 
-    List<Blog> getAllBlogs();
+    // 模糊查询所有blog
+    List<Blog> getAllBlogs(@Param("searchContent") String searchContent);
+
+    // 模糊查询所有标题
+    List<String> getTitle(@Param("searchTitle") String searchTitle);
 }

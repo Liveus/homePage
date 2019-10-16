@@ -15,11 +15,20 @@ public interface BlogService {
 
     /**
      * get all blogs
-     * @param user
+     * @param searchContent
      * @return
      */
-    List<Blog> getBlogs(User user);
+    List<Blog> getBlogs(String searchContent);
 
+    /**
+    * @Desc:  查询文章标题
+    * @author: shenliqiang
+    * @Time: 2019/10/14 11:29
+    * @param null
+    * @return
+    */
+
+    List<String> getTitles(String searchTitle);
     /**
      * 根据blog id获取blog详情
      * @param id

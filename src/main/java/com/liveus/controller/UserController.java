@@ -55,18 +55,19 @@ public class UserController {
     @CrossOrigin
     public Map<String,Object> login(Userdto userdto,HttpSession session){
         Map<String,Object> map =new HashMap<String,Object>();
+        System.out.println(userdto);
         String userName=userdto.getUserName();
-        String password=userdto.getUserName();
+        String password=userdto.getPassWord();
         if(!userName.equals("") && !password.equals("")){
             User user =new User(userName,password);
             if(userService.userLoginWithPasswd(user)){
                 session.setAttribute("user",user);
-                map.put("result","1");//登陆成功
+                map.put("result","success");//登陆成功
             }else{
-                map.put("result","2");//密码不正确
+                map.put("result","error passWord");//密码不正确
             }
         }else{
-            map.put("result","0");//用户名和密码不得为空
+            map.put("result","username&password cann't be null");//用户名和密码不得为空
         }
         return map;
     }

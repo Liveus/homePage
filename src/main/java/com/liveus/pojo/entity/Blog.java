@@ -1,264 +1,225 @@
 package com.liveus.pojo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "blog")
-public class Blog {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    /**
-     * 标题
-     */
-    private String title;
-
-    /**
-     * 总结
-     */
-    private String summary;
-
-    private Date uploadtime;
-
-    /**
-     * blog类型
-     */
-    private String type;
-
-    /**
-     * 阅读数
-     */
-    private String readsum;
-
-    /**
-     * 完成？1：0
-     */
-    private Byte isfinished;
-
-    /**
-     * 更新blog
-     */
-    private Date updatetime;
-
-    /**
-     * 已删除？1：0
-     */
-    private Byte deleted;
-
-    private Date deletedtime;
-
-    /**
-     * 内容
-     */
-    private String content;
-
-    /**
-     * html内容
-     */
-    private String html;
-
-    /**
-     * @return id
-     */
+public class Blog implements Serializable {
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    /**标题*/
+    private String title;
+
+    /*** 内容*/
+    private String content;
+
+    /*** html内容*/
+    private String html;
+
     /**
-     * 获取标题
-     *
-     * @return title - 标题
+     * 代码主题样式
      */
+    private String theme;
+
+    /*** 文章标签*/
+    private String blogtag;
+
+    /**
+     * 分类专栏
+     */
+    private String blogclass;
+
+    /**
+     * 文章类型
+     */
+    private String blogtype;
+
+    /**
+     * 资源名称
+     */
+    private String sourcename;
+
+    /**
+     * 资源路径
+     */
+    private String sourcelink;
+
+    /*** 完成？1：0*/
+    private Byte isfinished;
+
+    /**
+     * 创建人
+     */
+    private Integer create_by;
+
+    /**
+     * 创建时间
+     */
+    private Date create_time;
+
+    /**
+     * 更新人
+     */
+    private Integer update_by;
+
+    /**
+     * 更新时间
+     */
+    private Date update_time;
+
+    /*** 已删除？1：0*/
+    private Byte deleted;
+
+    @Override
+    public String toString() {
+        return "Blog{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", html='" + html + '\'' +
+                ", theme='" + theme + '\'' +
+                ", blogtag='" + blogtag + '\'' +
+                ", blogclass='" + blogclass + '\'' +
+                ", blogtype='" + blogtype + '\'' +
+                ", sourcename='" + sourcename + '\'' +
+                ", sourcelink='" + sourcelink + '\'' +
+                ", isfinished=" + isfinished +
+                ", create_by=" + create_by +
+                ", create_time=" + create_time +
+                ", update_by=" + update_by +
+                ", update_time=" + update_time +
+                ", deleted=" + deleted +
+                '}';
+    }
+
     public String getTitle() {
         return title;
     }
 
-    /**
-     * 设置标题
-     *
-     * @param title 标题
-     */
     public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+        this.title = title;
     }
 
-    /**
-     * 获取总结
-     *
-     * @return summary - 总结
-     */
-    public String getSummary() {
-        return summary;
-    }
-
-    /**
-     * 设置总结
-     *
-     * @param summary 总结
-     */
-    public void setSummary(String summary) {
-        this.summary = summary == null ? null : summary.trim();
-    }
-
-    /**
-     * @return uploadtime
-     */
-    public Date getUploadtime() {
-        return uploadtime;
-    }
-
-    /**
-     * @param uploadtime
-     */
-    public void setUploadtime(Date uploadtime) {
-        this.uploadtime = uploadtime;
-    }
-
-    /**
-     * 获取blog类型
-     *
-     * @return type - blog类型
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * 设置blog类型
-     *
-     * @param type blog类型
-     */
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
-    }
-
-    /**
-     * 获取阅读数
-     *
-     * @return readsum - 阅读数
-     */
-    public String getReadsum() {
-        return readsum;
-    }
-
-    /**
-     * 设置阅读数
-     *
-     * @param readsum 阅读数
-     */
-    public void setReadsum(String readsum) {
-        this.readsum = readsum == null ? null : readsum.trim();
-    }
-
-    /**
-     * 获取完成？1：0
-     *
-     * @return isfinished - 完成？1：0
-     */
-    public Byte getIsfinished() {
-        return isfinished;
-    }
-
-    /**
-     * 设置完成？1：0
-     *
-     * @param isfinished 完成？1：0
-     */
-    public void setIsfinished(Byte isfinished) {
-        this.isfinished = isfinished;
-    }
-
-    /**
-     * 获取更新blog
-     *
-     * @return updatetime - 更新blog
-     */
-    public Date getUpdatetime() {
-        return updatetime;
-    }
-
-    /**
-     * 设置更新blog
-     *
-     * @param updatetime 更新blog
-     */
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
-    }
-
-    /**
-     * 获取已删除？1：0
-     *
-     * @return deleted - 已删除？1：0
-     */
-    public Byte getDeleted() {
-        return deleted;
-    }
-
-    /**
-     * 设置已删除？1：0
-     *
-     * @param deleted 已删除？1：0
-     */
-    public void setDeleted(Byte deleted) {
-        this.deleted = deleted;
-    }
-
-    /**
-     * @return deletedtime
-     */
-    public Date getDeletedtime() {
-        return deletedtime;
-    }
-
-    /**
-     * @param deletedtime
-     */
-    public void setDeletedtime(Date deletedtime) {
-        this.deletedtime = deletedtime;
-    }
-
-    /**
-     * 获取内容
-     *
-     * @return content - 内容
-     */
     public String getContent() {
         return content;
     }
 
-    /**
-     * 设置内容
-     *
-     * @param content 内容
-     */
     public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+        this.content = content;
     }
 
-    /**
-     * 获取html内容
-     *
-     * @return html - html内容
-     */
     public String getHtml() {
         return html;
     }
 
-    /**
-     * 设置html内容
-     *
-     * @param html html内容
-     */
     public void setHtml(String html) {
-        this.html = html == null ? null : html.trim();
+        this.html = html;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    public String getBlogtag() {
+        return blogtag;
+    }
+
+    public void setBlogtag(String blogtag) {
+        this.blogtag = blogtag;
+    }
+
+    public String getBlogclass() {
+        return blogclass;
+    }
+
+    public void setBlogclass(String blogclass) {
+        this.blogclass = blogclass;
+    }
+
+    public String getBlogtype() {
+        return blogtype;
+    }
+
+    public void setBlogtype(String blogtype) {
+        this.blogtype = blogtype;
+    }
+
+    public String getSourcename() {
+        return sourcename;
+    }
+
+    public void setSourcename(String sourcename) {
+        this.sourcename = sourcename;
+    }
+
+    public String getSourcelink() {
+        return sourcelink;
+    }
+
+    public void setSourcelink(String sourcelink) {
+        this.sourcelink = sourcelink;
+    }
+
+    public Byte getIsfinished() {
+        return isfinished;
+    }
+
+    public void setIsfinished(Byte isfinished) {
+        this.isfinished = isfinished;
+    }
+
+    public Integer getCreate_by() {
+        return create_by;
+    }
+
+    public void setCreate_by(Integer create_by) {
+        this.create_by = create_by;
+    }
+
+    public Date getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
+    }
+
+    public Integer getUpdate_by() {
+        return update_by;
+    }
+
+    public void setUpdate_by(Integer update_by) {
+        this.update_by = update_by;
+    }
+
+    public Date getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Date update_time) {
+        this.update_time = update_time;
+    }
+
+    public Byte getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Byte deleted) {
+        this.deleted = deleted;
     }
 }
