@@ -21,14 +21,34 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean userLoginWithPasswd(User user) {
-        String passwoRedis = stringRedisTemplate.opsForValue().get(user.getName());//redis中的密码
+        String passwdRedis = stringRedisTemplate.opsForValue().get(user.getName());//redis中的密码
         String passwdRequest = AESUtils.AESEncode(user.getPassword());//请求中的密码
-        if(passwdRequest.equals(passwoRedis)){
-            return true;
-        }else if(userMapper.loginBypasswds(user.getName()).equals(AESUtils.AESEncode(user.getPassword()))){
-            stringRedisTemplate.opsForValue().set(user.getName(), AESUtils.AESEncode(user.getPassword()),100, TimeUnit.SECONDS);//存入redis
-            return true;
+        String passwdSql ;
+        // 缓存有值
+        if(passwdRedis != null){
+            // 缓存正确
+            if(passwdRedis.equals(passwdRequest)){
+                return true;
+            } else {
+                passwdSql = userMapper.loginBypasswds(user.getName());
+                // 无用户
+                if(passwdSql == null){
+                    return false;
+                }else {
+                    // 密码是否正确
+                    return passwdSql.equals(passwdRequest);
+                }
+            }
+        // 缓存无值
+        }else {
+            passwdSql = userMapper.loginBypasswds(user.getName());
+            // 无用户
+            if(passwdSql == null){
+                return false;
+            }else {
+                // 密码是否正确
+                return passwdSql.equals(passwdRequest);
+            }
         }
-        return false;
     }
 }

@@ -1,5 +1,6 @@
 package com.liveus.controller;
 
+import com.liveus.enums.CommonStatus;
 import com.liveus.pojo.dto.Userdto;
 import com.liveus.pojo.entity.Configbean2;
 import com.liveus.pojo.entity.User;
@@ -55,7 +56,6 @@ public class UserController {
     @CrossOrigin
     public Map<String,Object> login(Userdto userdto,HttpSession session){
         Map<String,Object> map =new HashMap<String,Object>();
-        System.out.println(userdto);
         String userName=userdto.getUserName();
         String password=userdto.getPassWord();
         if(!userName.equals("") && !password.equals("")){
@@ -63,8 +63,9 @@ public class UserController {
             if(userService.userLoginWithPasswd(user)){
                 session.setAttribute("user",user);
                 map.put("result","success");//登陆成功
+                map.put("token","testdasdas");//登陆成功
             }else{
-                map.put("result","error passWord");//密码不正确
+                map.put("result","error username or passWord");//密码不正确
             }
         }else{
             map.put("result","username&password cann't be null");//用户名和密码不得为空
@@ -72,9 +73,12 @@ public class UserController {
         return map;
     }
 
+    public CommonStatus logout(){
+        return CommonStatus.LOGOUT_OK;
+    }
+
     @RequestMapping("/attribute")
     public String userdefinedAttribute(){
-        System.out.println(userName);
         return "userName:"+userName+"----"+"password:"+passWord;
     }
 
@@ -132,8 +136,5 @@ public class UserController {
 
     @AfterReturning()
     public void doafterReturning(){
-
     }
-
-
 }
