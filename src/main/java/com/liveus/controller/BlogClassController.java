@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping(value = "/blogType")
+@RequestMapping(value = "/blogClass")
 @RestController
 public class BlogClassController {
 
@@ -22,7 +22,7 @@ public class BlogClassController {
     }
 
     @ResponseBody
-    @PostMapping(value = "/newType")
+    @PostMapping(value = "/newClass")
     @ApiOperation(value = "增加分类专栏",httpMethod = "POST",notes = "增加分类专栏")
     @ApiParam(name = "newType",value = "新类型",required = true)
     @CrossOrigin

@@ -16,4 +16,8 @@ public interface BlogClassMapper extends MyMapper<Blogtype> {
     int insertNewBlog(@Param("type") String type,@Param("blogsum")Integer blogsum);
 
     List<BlogtypeVo> getAllType();
+
+    String selectById(@Param("id") Integer id);
+
+    Integer selectByName(@Param("name")String name);
 }

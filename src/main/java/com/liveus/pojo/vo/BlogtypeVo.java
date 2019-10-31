@@ -13,6 +13,7 @@ import java.util.Objects;
  * @Warning: 本内容仅限于公司内部传阅, 禁止外泄或用于其它商业目的
  */
 public class BlogtypeVo implements Serializable {
+
     @ApiParam(value = "id")
     private Integer id;
 

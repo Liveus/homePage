@@ -1,11 +1,10 @@
 package com.liveus.controller;
 
+import com.liveus.pojo.dto.BlogDto;
 import com.liveus.pojo.entity.Blog;
-import com.liveus.pojo.entity.User;
 import com.liveus.service.BlogService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/blog")
@@ -24,7 +22,7 @@ public class BlogController {
     @Resource
     BlogService blogService;
 
-    @Autowired
+    @Resource
     private HttpServletRequest request;
 
     /**
@@ -33,10 +31,13 @@ public class BlogController {
      */
     @PostMapping("/submit")
     @ResponseBody
-    public void submit(Blog blog){
+    @CrossOrigin
+    @ApiOperation(value = "上传blog",httpMethod = "POST",notes = "上传blog")
+    public void submit(Blog blog, @RequestParam("newBlogClass")List<String> newBlogClass){
         //设置默认为1
-        blog.setCreate_by(1);
-        blogService.newBlog(blog);
+        var a = 1;
+        blog.setCreate_by(a);
+        blogService.newBlog(blog,newBlogClass);
     }
 
     /**
@@ -46,8 +47,8 @@ public class BlogController {
     @PostMapping(value = "/allBlogs")
     @ResponseBody
     @CrossOrigin
-    public List<Blog> getAllBlog(@RequestParam("searchContent") String searchContent){
-        return blogService.getBlogs(searchContent);
+    public List<Blog> getAllBlog(BlogDto dto){
+        return blogService.getBlogs(dto);
     }
 
     /**
@@ -73,7 +74,6 @@ public class BlogController {
     @ApiOperation(value = "获取blog详细内容",httpMethod = "GET",notes = "获取blog详细内容")
     @ApiParam(name = "blogId",value = "Integer",required = true)
     public Blog getBlogById(@PathVariable("blogId") Integer blogId){
-        System.out.println("zz");
         return  blogService.getBlogById(blogId);
     }
 

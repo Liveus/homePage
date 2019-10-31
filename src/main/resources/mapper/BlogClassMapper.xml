@@ -21,6 +21,14 @@
   <select id="getAllType" resultType="com.liveus.pojo.vo.BlogtypeVo">
     SELECT id,typename from blogclass
     WHERE deleted = 0
-    order by  createdtime;
+    order by  typename;
+  </select>
+
+  <select id="selectById" resultType="java.lang.String">
+    SELECT typename FROM blogclass  WHERE id = #{id}
+  </select>
+
+  <select id="selectByName" resultType="java.lang.Integer">
+    SELECT id FROM blogclass WHERE typename = #{name}
   </select>
 </mapper>

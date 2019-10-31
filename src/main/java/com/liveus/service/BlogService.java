@@ -1,5 +1,6 @@
 package com.liveus.service;
 
+import com.liveus.pojo.dto.BlogDto;
 import com.liveus.pojo.entity.Blog;
 import com.liveus.pojo.entity.User;
 
@@ -11,20 +12,20 @@ public interface BlogService {
      * @param blog
      * @return result?1:0
      */
-    int newBlog(Blog blog);
+    int newBlog(Blog blog,List<String> newBlogClass);
 
     /**
      * get all blogs
-     * @param searchContent
+     * @param blogDto
      * @return
      */
-    List<Blog> getBlogs(String searchContent);
+    List<Blog> getBlogs(BlogDto blogDto);
 
     /**
     * @Desc:  查询文章标题
     * @author: shenliqiang
     * @Time: 2019/10/14 11:29
-    * @param null
+    * @param searchTitle
     * @return
     */
 

@@ -24,6 +24,14 @@
      <if test="searchContent !=null and searchContent != ''">
         and title like concat('%',#{searchContent,jdbcType=VARCHAR},'%')
      </if>
+      <if test="blogType !=null and blogType != ''">
+          and blogtype = #{blogType,jdbcType=VARCHAR}
+      </if>
+      <if test="blogClass !=null and blogClass.size() > 0">
+          <foreach item="item" index="index" collection="blogClass">
+              and FIND_IN_SET(#{item},blogClass)
+          </foreach>
+      </if>
      order by create_time
   </select>
 

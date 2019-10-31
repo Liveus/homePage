@@ -36,7 +36,7 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
         // excludePathPatterns 用户排除拦截
         registry.addInterceptor(new MyInterceptor()).excludePathPatterns("/user/toLogin","/user/login","/index",
                 "/blog/allBlogs","/blog/searchTitle","/blog/getBlogById/**","/blog/submit","/blog/uploadSource",
-                "/blogType/getAll","/blogType/newType");
+                "/blogClass/getAll","/blogClass/newClass");
         super.addInterceptors(registry);
     }
 

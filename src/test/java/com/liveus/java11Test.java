@@ -1,5 +1,9 @@
 package com.liveus;
 
+import com.liveus.pojo.entity.User;
+
+import java.math.BigDecimal;
+
 import static java.lang.System.out;
 
 public class java11Test {
@@ -10,9 +14,18 @@ public class java11Test {
             BigDecimal b = new BigDecimal(String.valueOf(0.0023));
             System.out.println(a*100);
             System.out.println(b);
-        }
+        }*/
 
-        User user = new User();
+        var a = "xtea";
+        var b = 2;
+        var c = 'c';
+
+        out.println(a);
+        out.println(b);
+        out.println(c);
+
+
+/*        User user = new User();
         user.setName("aa");
         user.setId(11);
         System.out.println(user.toString());

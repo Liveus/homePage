@@ -5,6 +5,7 @@ import com.liveus.pojo.dto.Userdto;
 import com.liveus.pojo.entity.Configbean2;
 import com.liveus.pojo.entity.User;
 import com.liveus.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,9 +52,10 @@ public class UserController {
     /**
      *登录操作
      **/
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @PostMapping(value = "/login")
     @ResponseBody
     @CrossOrigin
+    @ApiOperation(value = "登陆",httpMethod = "POST",notes = "")
     public Map<String,Object> login(Userdto userdto,HttpSession session){
         Map<String,Object> map =new HashMap<String,Object>();
         String userName=userdto.getUserName();
@@ -61,8 +63,10 @@ public class UserController {
         if(!userName.equals("") && !password.equals("")){
             User user =new User(userName,password);
             if(userService.userLoginWithPasswd(user)){
+                // 暂定session
                 session.setAttribute("user",user);
                 map.put("result","success");//登陆成功
+                // 模拟token
                 map.put("token","testdasdas");//登陆成功
             }else{
                 map.put("result","error username or passWord");//密码不正确
@@ -73,7 +77,12 @@ public class UserController {
         return map;
     }
 
+    @GetMapping(value = "/logout")
+    @ResponseBody
+    @CrossOrigin
+    @ApiOperation(value = "登出操作",httpMethod = "GET",notes = "")
     public CommonStatus logout(){
+        //具体步骤代写
         return CommonStatus.LOGOUT_OK;
     }
 
