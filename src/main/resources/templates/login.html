@@ -20,13 +20,13 @@
             url : "/user/login",
             data : {
                 "userName" : $("#userName").val(),
-                "password" : $("#password").val()
+                "passWord" : $("#password").val()
             },
             dataType : "json",
             success : function(data) {
-                if (data.result == "1") {
+                if (data.result === "success") {
                     window.location.href ="/index";
-                }else if (data.result == "2"){
+                }else if (data.result === "error username or passWord"){
                     alert("密码不正确！");
                 }  else {
                     alert("账号密码不能为空！");

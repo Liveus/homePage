@@ -17,6 +17,7 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //通过addResourceHandler添加映射路径，然后通过addResourceLocations来指定路径。
         registry.addResourceHandler("/my/**").addResourceLocations("classpath:/my/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
         super.addResourceHandlers(registry);
     }
 
@@ -34,8 +35,11 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         // addPathPatterns 用于添加拦截规则
         // excludePathPatterns 用户排除拦截
-        registry.addInterceptor(new MyInterceptor()).excludePathPatterns("/user/toLogin","/user/login","/index",
-                "/blog/allBlogs","/blog/searchTitle","/blog/getBlogById/**","/blog/submit","/blog/uploadSource",
+        registry.addInterceptor(new MyInterceptor()).excludePathPatterns(
+                "/**/*.png", "/**/*.jpg", "/**/*.jpeg",
+                "/user/toLogin","/user/login",
+                "/index",
+                "/blog/allBlogs","/blog/searchTitle","/blog/getBlogById/**","/blog/submit","/blog/uploadSource","/blog/uploadBlogSource",
                 "/blogClass/getAll","/blogClass/newClass");
         super.addInterceptors(registry);
     }

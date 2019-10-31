@@ -5,7 +5,6 @@ import com.liveus.pojo.entity.Blog;
 import com.liveus.service.BlogService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.Calendar;
 import java.util.List;
 
 @RequestMapping("/blog")
@@ -78,12 +78,19 @@ public class BlogController {
     }
 
 
+    /**
+    * @Desc:  上传blog附件中的资源
+    * @author: shenliqiang
+    * @Time: 2019/10/31 15:19
+    * @param
+    * @return
+    */
+
     @PostMapping(value="/uploadSource")
     @ResponseBody
     @CrossOrigin
     @ApiOperation(value = "blog资源上传",httpMethod = "POST",notes = "blog资源上传")
-    @ApiParam(name = "newType",value = "新类型",required = true)
-    public String upload(MultipartFile file) {
+    public String uploadSource(MultipartFile file) {
         // 判断文件是否为空
         String filePath = "";
         if (!file.isEmpty()) {
@@ -102,7 +109,7 @@ public class BlogController {
     }
 
     /***
-     * 读取上传文件中得所有文件并返回
+     * 读取所有的上传文件并返回
      *
      * @return
      */
@@ -117,5 +124,38 @@ public class BlogController {
             System.out.println(fileNames[i]);
         }
         return mav;
+    }
+
+
+    /**
+    * @Desc:  上传blog中添加的图片等资源
+    * @author: shenliqiang
+    * @Time: 2019/10/31 15:19
+    * @param
+    * @return
+    */
+
+    @PostMapping(value="/uploadBlogSource")
+    @ResponseBody
+    @CrossOrigin
+    @ApiOperation(value = "上传blog中添加的图片等资源",httpMethod = "POST",notes = "上传blog中添加的图片等资源")
+    public String uploadBlogSource(MultipartFile file) {
+        // 判断文件是否为空
+        String filePath = "";
+        String imgName = "";
+        if (!file.isEmpty()) {
+            try {
+                // 生成文件保存路径
+                imgName = Calendar.getInstance().getTime().getTime()+
+                        file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
+                // 文件保存路径
+                filePath = request.getSession().getServletContext().getRealPath("/")+imgName;
+                // 转存文件
+                file.transferTo(new File(filePath));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "http://127.0.0.1:8082/"+imgName;
     }
 }
