@@ -1,13 +1,12 @@
 package com.liveus.dao;
 
 import com.liveus.pojo.entity.User;
-import com.liveus.utils.MyMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component
 @Mapper
-public interface UserMapper extends MyMapper<User> {
+public interface UserMapper {
 
     String loginBypasswds(String name);
 

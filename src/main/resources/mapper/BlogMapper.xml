@@ -2,48 +2,86 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liveus.dao.BlogMapper">
 
-  <sql id="Base_Column_List">
-    id, title, summary,content,html
-  </sql>
+    <!--写入-->
+    <insert id="insertBlog" parameterType="com.liveus.pojo.entity.Blog">
+        insert into blog (title, content, html, theme, blogtag, blogclass, blogtype, sourcename, sourcelink, isfinished,
+                          create_by, create_time)
+        values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{html,jdbcType=VARCHAR},
+                #{theme,jdbcType=VARCHAR},
+                #{blogtag,jdbcType=VARCHAR}, #{blogclass,jdbcType=VARCHAR}, #{blogtype,jdbcType=VARCHAR},
+                #{sourcename,jdbcType=VARCHAR},
+                #{sourcelink,jdbcType=VARCHAR}, #{isfinished,jdbcType=INTEGER}, #{create_by,jdbcType=INTEGER},
+                sysdate())
+    </insert>
 
-  <insert id="insertBlog" parameterType="com.liveus.pojo.entity.Blog">
-    insert into blog (title, content,html,theme,blogtag,blogclass,blogtype,sourcename,sourcelink,isfinished,create_by,create_time)
-    values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{html,jdbcType=VARCHAR}, #{theme,jdbcType=VARCHAR},
-            #{blogtag,jdbcType=VARCHAR}, #{blogclass,jdbcType=VARCHAR}, #{blogtype,jdbcType=VARCHAR}, #{sourcename,jdbcType=VARCHAR},
-            #{sourcelink,jdbcType=VARCHAR}, #{isfinished,jdbcType=INTEGER}, #{create_by,jdbcType=INTEGER}, sysdate())
-  </insert>
+    <!--查询详细-->
+    <select id="getBlogById" parameterType="int" resultType="com.liveus.pojo.entity.Blog">
+        SELECT *
+        FROM blog
+        where isfinished = 2
+          and id = #{id,jdbcType =INTEGER}
+    </select>
 
-  <select id="getBlogById" parameterType="int" resultType="com.liveus.pojo.entity.Blog">
-    SELECT * FROM blog where isfinished = 2 and id = #{id,jdbcType =INTEGER}
-  </select>
+    <!--查询所有-->
+    <select id="getAllBlogs" parameterType="string" resultType="com.liveus.pojo.entity.Blog">
+        SELECT * FROM blog
+        where isfinished = 2
+        and deleted = 0
+        <if test="searchContent !=null and searchContent != ''">
+            and title like concat('%',#{searchContent,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="blogType !=null and blogType != ''">
+            and blogtype = #{blogType,jdbcType=VARCHAR}
+        </if>
+        <if test="blogClass !=null and blogClass.size() > 0">
+            <foreach item="item" index="index" collection="blogClass">
+                and FIND_IN_SET(#{item},blogClass)
+            </foreach>
+        </if>
+        order by create_time
+    </select>
 
-  <select id="getAllBlogs" parameterType="string" resultType="com.liveus.pojo.entity.Blog">
-     SELECT * FROM blog
-     where isfinished = 2
-     and deleted = 0
-     <if test="searchContent !=null and searchContent != ''">
-        and title like concat('%',#{searchContent,jdbcType=VARCHAR},'%')
-     </if>
-      <if test="blogType !=null and blogType != ''">
-          and blogtype = #{blogType,jdbcType=VARCHAR}
-      </if>
-      <if test="blogClass !=null and blogClass.size() > 0">
-          <foreach item="item" index="index" collection="blogClass">
-              and FIND_IN_SET(#{item},blogClass)
-          </foreach>
-      </if>
-     order by create_time
-  </select>
+    <!--条件查询-->
+    <select id="queryByPageList" resultType="com.liveus.pojo.vo.BlogVo">
+        SELECT id, title, content, blogtag, blogclass, blogtype, create_time
+        FROM blog
+        WHERE isfinished = 2
+        AND deleted = 0
+        <if test="searchContent !=null and searchContent != ''">
+            and title like concat('%',#{searchContent,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="blogType !=null and blogType != '' and blogType != 0 ">
+            and blogtype = #{blogType,jdbcType=VARCHAR}
+        </if>
+        <if test="blogClass !=null and blogClass.size() > 0">
+            <foreach item="item" index="index" collection="blogClass">
+                and FIND_IN_SET(#{item},blogClass)
+            </foreach>
+        </if>
+        order by create_time
+    </select>
 
-  <select id="getTitle" parameterType="string" resultType="string">
-    SELECT title FROM BLOG
-    WHERE isfinished = 2
-    AND deleted = 0
-    <if test="searchTitle !=null and searchTitle != ''">
-      AND title like concat('%',#{searchTitle,jdbcType=VARCHAR},'%')
-    </if>
-    ORDER BY create_time
-    LIMIT 5
-  </select>
+    <!--获取blog's title-->
+    <select id="getTitle" parameterType="string" resultType="string">
+        SELECT title FROM BLOG
+        WHERE isfinished = 2
+        AND deleted = 0
+        <if test="searchTitle !=null and searchTitle != ''">
+            AND title like concat('%',#{searchTitle,jdbcType=VARCHAR},'%')
+        </if>
+        ORDER BY create_time
+        LIMIT 5
+    </select>
 
+    <select id="getRecommendedBlogByTime" resultType="com.liveus.pojo.vo.BlogRecommendVo">
+
+    </select>
+
+    <select id="getRecommendedBlogByClass" resultType="com.liveus.pojo.vo.BlogRecommendVo">
+
+    </select>
+
+    <select id="getRecommendedBlogByTag" resultType="com.liveus.pojo.vo.BlogRecommendVo">
+
+    </select>
 </mapper>

@@ -1,6 +1,10 @@
 package com.liveus.pojo.dto;
 
+import com.liveus.pojo.common.PageDto;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -11,9 +15,18 @@ import java.util.List;
  * @Copyright: © 2018 杭州凯立通信有限公司 版权所有
  * @Warning: 本内容仅限于公司内部传阅, 禁止外泄或用于其它商业目的
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class BlogDto {
+@ApiModel("分页查询dto")
+public class BlogDto extends PageDto {
+
+    @ApiModelProperty("搜索内容")
     private String searchContent;
+
+    @ApiModelProperty("blog类型")
     private String blogType;
+
+    @ApiModelProperty("分类专栏")
     private List blogClass;
+
 }

@@ -6,6 +6,7 @@ import com.liveus.service.BlogClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service("blogTypeService")
@@ -16,8 +17,7 @@ public class BlogClassServiceImp implements BlogClassService {
 
     @Override
     public int addNewType(String type) {
-        int result = blogClassMapper.insertNewBlog(type,0);
-        return result;
+        return blogClassMapper.insertNewBlog(type,0);
     }
 
     @Override

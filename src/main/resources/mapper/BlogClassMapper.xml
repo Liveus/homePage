@@ -31,4 +31,5 @@
   <select id="selectByName" resultType="java.lang.Integer">
     SELECT id FROM blogclass WHERE typename = #{name}
   </select>
+
 </mapper>

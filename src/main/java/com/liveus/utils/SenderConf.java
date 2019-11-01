@@ -1,4 +1,4 @@
-package com.liveus.config;
+package com.liveus.utils;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;

@@ -7,19 +7,12 @@ import com.liveus.pojo.entity.User;
 import com.liveus.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.aspectj.lang.annotation.AfterReturning;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 
@@ -27,27 +20,14 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    StringRedisTemplate stringRedisTemplate;
-
-    @Autowired
-    RedisTemplate redisTemplate;
-
-    @Value(value="${com.liveus.userName}")
-    private String userName;
-    @Value(value="${com.liveus.passWord}")
-    private String passWord;
-    @Value(value = "${com.liveus.randomValue}")
-    private String randomValue;
-    @Value(value = "${com.liveus.uuid}")
-    private String uuid;
-    @Value(value = "${spring.datasource.url}")
-    private String url;
     @Resource
     UserService userService;
-
-    @Autowired
+    @Resource
     private Configbean2 configbean2;
+
+    @Value(value = "${spring.datasource.url}")
+    private String url;
+
 
     /**
      *登录操作
@@ -86,11 +66,6 @@ public class UserController {
         return CommonStatus.LOGOUT_OK;
     }
 
-    @RequestMapping("/attribute")
-    public String userdefinedAttribute(){
-        return "userName:"+userName+"----"+"password:"+passWord;
-    }
-
     @RequestMapping("/configBean")
     public String ConfigBean(){
         return this.configbean2.toString();
@@ -99,7 +74,7 @@ public class UserController {
     @RequestMapping(value="/ex")
     @ResponseBody
     public String error(){
-        int i=5/0;
+        int i= 5/0;
         return "ex";
     }
 
@@ -114,33 +89,6 @@ public class UserController {
         // 未知的异常做出响应
         e.printStackTrace();
         return "发生了未知异常";
-    }
-
-    @RequestMapping("/Get1")
-    public void get() {
-        stringRedisTemplate.opsForValue().set("test", "I'm a egg");
-        stringRedisTemplate.opsForList().leftPush("forlist","list1");
-        System.out.println("value");
-    }
-
-    @RequestMapping("/ContextLoads")
-    public void contextLoads() {
-        User user = new User();
-        user.setId(11);
-        user.setName("li si");
-        user.setPassword("zhang san");
-        stringRedisTemplate.opsForValue().set("date", user.toString());
-        System.out.println(stringRedisTemplate.opsForValue().get("date"));
-    }
-
-    @RequestMapping("/Redistest")
-    public void Redis(){
-        long startTime=System.currentTimeMillis();
-        for (int i=0;i<1000;i++){
-            stringRedisTemplate.opsForValue().set(String.valueOf(i) ,new Date().toString());
-        }
-        long endTime=System.currentTimeMillis();
-        System.out.println(endTime-startTime);
     }
 
     @AfterReturning()

@@ -92,7 +92,6 @@
 			<artifactId>easypoi-base</artifactId>
 			<version>3.0.3</version>
 		</dependency>
-
 		<dependency>
 			<groupId>cn.afterturn</groupId>
 			<artifactId>easypoi-web</artifactId>
@@ -131,20 +130,17 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
-		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
-		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -172,6 +168,19 @@
 			<version>1.2.56</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.baomidou/mybatisplus-spring-boot-starter -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatisplus-spring-boot-starter</artifactId>
+			<version>1.0.4</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus</artifactId>
+			<version>2.3.3</version>
+		</dependency>
 
 	</dependencies>
 
@@ -193,7 +202,7 @@
 			</resource>
 		</resources>
 
-		<!--mybatis插件-->
+		<!--mybati插件-->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

@@ -1,7 +1,10 @@
 package com.liveus.controller;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.liveus.pojo.dto.BlogDto;
 import com.liveus.pojo.entity.Blog;
+import com.liveus.pojo.vo.BlogRecommendVo;
+import com.liveus.pojo.vo.BlogVo;
 import com.liveus.service.BlogService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -40,7 +43,7 @@ public class BlogController {
         blogService.newBlog(blog,newBlogClass);
     }
 
-    /**
+    /**暂无使用-------------------------------------
      * 获取当前用户所有blog
      * @return
      */
@@ -51,8 +54,16 @@ public class BlogController {
         return blogService.getBlogs(dto);
     }
 
+    @GetMapping(value = "/getBlogs")
+    @ResponseBody
+    @CrossOrigin
+    @ApiOperation(value = "分页查询",httpMethod = "GET",notes = "分页查询")
+    public Page<BlogVo> queryByPageList(@ModelAttribute BlogDto dto){
+        return this.blogService.queryByPageList(new Page<>(dto.getPage(),dto.getPageSize()),dto);
+    }
+
     /**
-     * 获取当前用户所有blog
+     * 获取当前用户所有blog标题
      * @return
      */
     @PostMapping(value = "/searchTitle")
@@ -77,6 +88,21 @@ public class BlogController {
         return  blogService.getBlogById(blogId);
     }
 
+    /**获取推荐的blog
+    * @Desc:
+    * @author: shenliqiang
+    * @Time: 2019/11/1 17:05
+    * @param null
+    * @return
+    */
+
+    @GetMapping("/getRecommend")
+    @ResponseBody
+    @CrossOrigin
+    @ApiOperation(value = "获取推荐的blog",httpMethod = "GET",notes = "获取推荐的blog")
+    public List<BlogRecommendVo> getRecommendBlog(@ModelAttribute("type") Integer type, @ModelAttribute("id") Integer id){
+        return this.blogService.getRecommendedBlog(type,id);
+    }
 
     /**
     * @Desc:  上传blog附件中的资源
@@ -125,7 +151,6 @@ public class BlogController {
         }
         return mav;
     }
-
 
     /**
     * @Desc:  上传blog中添加的图片等资源

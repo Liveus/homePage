@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @EnableConfigurationProperties({Configbean2.class})
 @SpringBootApplication
-@MapperScan(basePackages = "com.liveus.dao"/*, markerInterface = MyMapper.class*/)
+@MapperScan(basePackages = "com.liveus.dao")
 public class HomePageApplication {
 
 	public static void main(String[] args) {

@@ -1,12 +1,15 @@
 package com.liveus.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.IService;
 import com.liveus.pojo.dto.BlogDto;
 import com.liveus.pojo.entity.Blog;
-import com.liveus.pojo.entity.User;
+import com.liveus.pojo.vo.BlogRecommendVo;
+import com.liveus.pojo.vo.BlogVo;
 
 import java.util.List;
 
-public interface BlogService {
+public interface BlogService extends IService<Blog> {
     /**
      * add new blog
      * @param blog
@@ -20,6 +23,14 @@ public interface BlogService {
      * @return
      */
     List<Blog> getBlogs(BlogDto blogDto);
+
+    /**
+     * 分页查询
+     * @param page
+     * @param dto
+     * @return
+     */
+    Page<BlogVo> queryByPageList(Page<BlogVo> page, BlogDto dto);
 
     /**
     * @Desc:  查询文章标题
@@ -36,4 +47,14 @@ public interface BlogService {
      * @return
      */
     Blog getBlogById(int id);
+
+    /**
+    * @Desc:  根据type获取推荐blog
+    * @author: shenliqiang
+    * @Time: 2019/11/1 17:14
+    * @param null
+    * @return
+    */
+
+    List<BlogRecommendVo> getRecommendedBlog(Integer type, Integer id);
 }

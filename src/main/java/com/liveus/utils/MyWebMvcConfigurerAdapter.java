@@ -39,7 +39,7 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
                 "/**/*.png", "/**/*.jpg", "/**/*.jpeg",
                 "/user/toLogin","/user/login",
                 "/index",
-                "/blog/allBlogs","/blog/searchTitle","/blog/getBlogById/**","/blog/submit","/blog/uploadSource","/blog/uploadBlogSource",
+                "/blog/allBlogs","/blog/getBlogs","/blog/searchTitle","/blog/getBlogById/**","/blog/submit","/blog/uploadSource","/blog/uploadBlogSource",
                 "/blogClass/getAll","/blogClass/newClass");
         super.addInterceptors(registry);
     }
