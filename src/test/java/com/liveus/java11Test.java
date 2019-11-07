@@ -1,9 +1,5 @@
 package com.liveus;
 
-import com.liveus.pojo.entity.User;
-
-import java.math.BigDecimal;
-
 import static java.lang.System.out;
 
 public class java11Test {

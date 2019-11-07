@@ -17,7 +17,7 @@
     $("#doLogin").click(function (e) {
         $.ajax({
             type : "POST",
-            url : "/user/login",
+            url : "/userEntity/login",
             data : {
                 "userName" : $("#userName").val(),
                 "passWord" : $("#password").val()

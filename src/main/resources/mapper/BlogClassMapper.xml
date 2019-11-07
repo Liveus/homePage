@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.liveus.dao.BlogClassMapper">
-  <resultMap id="BaseResultMap" type="com.liveus.pojo.entity.Blogtype">
+<mapper namespace="com.liveus.core.blog.mapper.BlogClassMapper">
+  <resultMap id="BaseResultMap" type="com.liveus.core.blog.pojo.entity.Blogtype">
     <!--
       WARNING - @mbg.generated
     -->
@@ -18,7 +18,7 @@
     VALUE (#{type,jdbcType = VARCHAR },#{blogsum,jdbcType = INTEGER },sysdate());
   </insert>
 
-  <select id="getAllType" resultType="com.liveus.pojo.vo.BlogtypeVo">
+  <select id="getAllType" resultType="com.liveus.core.user.pojo.vo.BlogtypeVo">
     SELECT id,typename from blogclass
     WHERE deleted = 0
     order by  typename;

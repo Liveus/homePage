@@ -1,7 +1,7 @@
 package com.liveus;
 
-import com.liveus.pojo.entity.Blog;
-import com.liveus.service.serviceImpl.HelloSender;
+import com.liveus.core.blog.pojo.entity.Blog;
+import com.liveus.config.HelloSender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

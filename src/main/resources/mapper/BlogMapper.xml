@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.liveus.dao.BlogMapper">
+<mapper namespace="com.liveus.core.blog.mapper.BlogMapper">
 
     <!--写入-->
-    <insert id="insertBlog" parameterType="com.liveus.pojo.entity.Blog">
-        insert into blog (title, content, html, theme, blogtag, blogclass, blogtype, sourcename, sourcelink, isfinished,
+    <insert id="insertBlog" parameterType="com.liveus.core.blog.pojo.entity.Blog">
+        insert into blog (title, content, text, theme, blogtag, blogclass, blogtype, sourcename, sourcelink, isfinished,
                           create_by, create_time)
-        values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{html,jdbcType=VARCHAR},
+        values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR},
                 #{theme,jdbcType=VARCHAR},
                 #{blogtag,jdbcType=VARCHAR}, #{blogclass,jdbcType=VARCHAR}, #{blogtype,jdbcType=VARCHAR},
                 #{sourcename,jdbcType=VARCHAR},
@@ -15,15 +15,15 @@
     </insert>
 
     <!--查询详细-->
-    <select id="getBlogById" parameterType="int" resultType="com.liveus.pojo.entity.Blog">
+    <select id="getBlogById" parameterType="int" resultType="com.liveus.core.blog.pojo.entity.Blog">
         SELECT *
         FROM blog
         where isfinished = 2
-          and id = #{id,jdbcType =INTEGER}
+        and id = #{id,jdbcType =INTEGER}
     </select>
 
     <!--查询所有-->
-    <select id="getAllBlogs" parameterType="string" resultType="com.liveus.pojo.entity.Blog">
+    <select id="getAllBlogs" parameterType="string" resultType="com.liveus.core.blog.pojo.entity.Blog">
         SELECT * FROM blog
         where isfinished = 2
         and deleted = 0
@@ -42,10 +42,10 @@
     </select>
 
     <!--条件查询-->
-    <select id="queryByPageList" resultType="com.liveus.pojo.vo.BlogVo">
-        SELECT id, title, content, blogtag, blogclass, blogtype, create_time
+    <select id="queryByPageList" resultType="com.liveus.core.user.pojo.vo.BlogVo">
+        SELECT id, title, text, blogtag, blogclass, blogtype, create_time
         FROM blog
-        WHERE isfinished = 2
+        WHERE isfinished = #{isfinished}
         AND deleted = 0
         <if test="searchContent !=null and searchContent != ''">
             and title like concat('%',#{searchContent,jdbcType=VARCHAR},'%')
@@ -73,15 +73,19 @@
         LIMIT 5
     </select>
 
-    <select id="getRecommendedBlogByTime" resultType="com.liveus.pojo.vo.BlogRecommendVo">
+    <select id="getRecommendedBlogBeforeTime" resultType="com.liveus.core.user.pojo.vo.BlogRecommendVo">
+        SELECT id,title,create_time FROM blog WHERE create_time > #{date} ORDER BY create_time LIMIT #{num};
+    </select>
+
+    <select id="getRecommendedBlogAfterTime" resultType="com.liveus.core.user.pojo.vo.BlogRecommendVo">
+        SELECT id,title,create_time FROM blog WHERE create_time <![CDATA[ < ]]> #{date} ORDER BY create_time LIMIT #{num};
+    </select>
+
+    <select id="getRecommendedBlogByClass" resultType="com.liveus.core.user.pojo.vo.BlogRecommendVo">
 
     </select>
 
-    <select id="getRecommendedBlogByClass" resultType="com.liveus.pojo.vo.BlogRecommendVo">
-
-    </select>
-
-    <select id="getRecommendedBlogByTag" resultType="com.liveus.pojo.vo.BlogRecommendVo">
+    <select id="getRecommendedBlogByTag" resultType="com.liveus.core.user.pojo.vo.BlogRecommendVo">
 
     </select>
 </mapper>
