@@ -10,4 +10,8 @@ public interface UserService {
      * @return
      */
     boolean userLoginWithPasswd(UserEntity userEntity);
+
+    UserEntity findUserById(Integer id);
+
+    UserEntity findUserByUsername(String username);
 }

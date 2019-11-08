@@ -22,7 +22,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -57,10 +56,11 @@ public class UserController {
             UserEntity userEntity =new UserEntity(userdto.getUserName(),userdto.getPassWord());
             if(userService.userLoginWithPasswd(userEntity)){
                 // 暂定session
+                userEntity = userService.findUserByUsername(userdto.getUserName());
                 session.setAttribute("user", userEntity);
                 map.put("result","success");
                 // 模拟token
-                map.put("token","TestToken");
+                map.put("token",userEntity.getToken());
                 // put user
                 map.put("user", userEntity);
                 responseMsg = "login success";

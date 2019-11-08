@@ -1,6 +1,7 @@
 package com.liveus.core.blog.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.liveus.common.annotation.UserLoginToken;
 import com.liveus.core.blog.pojo.dto.BlogDto;
 import com.liveus.core.blog.pojo.entity.Blog;
 import com.liveus.core.user.pojo.vo.BlogRecommendVo;
@@ -8,6 +9,7 @@ import com.liveus.core.user.pojo.vo.BlogVo;
 import com.liveus.core.blog.service.BlogService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,6 +34,7 @@ public class BlogController {
      * 上传新blog
      * @param blog
      */
+    @UserLoginToken
     @PostMapping("/submit")
     @ResponseBody
     @CrossOrigin
@@ -63,6 +66,15 @@ public class BlogController {
         return this.blogService.queryByPageList(new Page<>(dto.getPage(),dto.getPageSize()),dto);
     }
 
+    /**
+    * @Desc:  管理--获取所有blog
+    * @author: shenliqiang
+    * @Time: 2019/11/8 14:54
+    * @param dto
+    * @return
+    */
+
+    @UserLoginToken
     @GetMapping(value = "/manageBlog")
     @ResponseBody
     @CrossOrigin

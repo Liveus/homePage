@@ -7,6 +7,7 @@ import com.liveus.common.utils.AESUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -48,5 +49,15 @@ public class UserServiceImpl implements UserService {
                 return passwdSql.equals(passwdRequest);
             }
         }
+    }
+
+    @Override
+    public UserEntity findUserById(Integer id) {
+        return this.userMapper.selectByUserId(id);
+    }
+
+    @Override
+    public UserEntity findUserByUsername(String username) {
+        return this.userMapper.selectByUsername(username);
     }
 }

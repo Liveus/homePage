@@ -28,7 +28,8 @@ public class BusinessExceptionHandler {
      */
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        System.out.println("请求有参数才进来");
+        logger.info("请求有参数才进来");
+//        System.out.println("请求有参数才进来");
     }
 
     /**

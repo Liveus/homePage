@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
 
+/**
+* @Desc:  basic error
+* @author: shenliqiang
+* @Time: 2019/11/8 17:17
+*/
+
 @Controller
 public class BaseErrorController{
     @RequestMapping("/json")

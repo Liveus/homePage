@@ -19,4 +19,11 @@
     select password from user where  name = #{name}
   </select>
 
+  <select id="selectByUserId" resultType="com.liveus.core.user.pojo.entity.UserEntity" parameterType="integer">
+    SELECT * FROM user WHERE id = #{id}
+  </select>
+
+  <select id="selectByUsername" resultType="com.liveus.core.user.pojo.entity.UserEntity" parameterType="string">
+    SELECT * FROM user WHERE  name = #{username}
+  </select>
 </mapper>

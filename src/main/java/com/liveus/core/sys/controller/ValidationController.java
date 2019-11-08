@@ -13,6 +13,12 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
 
+/**
+* @Desc:  spring validation 验证
+* @author: shenliqiang
+* @Time: 2019/11/8 17:16
+*/
+
 @RestController
 @RequestMapping("/validate")
 public class ValidationController {
