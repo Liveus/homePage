@@ -33,7 +33,6 @@ public class MyBasicErrorController extends BasicErrorController {
      * @param response
      * @return
      */
-
     @RequestMapping(produces = "text/html", value = "/500")
     public ModelAndView errorHtml500(HttpServletRequest request, HttpServletResponse response) {
         response.setStatus(getStatus(request).value());
@@ -49,13 +48,12 @@ public class MyBasicErrorController extends BasicErrorController {
      * @param request
      * @return
      */
-
     @RequestMapping(value = "/500")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> error500(HttpServletRequest request) {
         Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
         HttpStatus status = getStatus(request);
         logger.info("500+");
-        return new ResponseEntity<Map<String, Object>>(body, status);
+        return new ResponseEntity<>(body, status);
     }
 }

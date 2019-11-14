@@ -61,6 +61,7 @@ public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
         registry.addInterceptor(myInterceptor()).addPathPatterns("/**").excludePathPatterns(
                 "/**/*.png", "/**/*.jpg", "/**/*.jpeg","/**/*.txt",
                 "/user/toLogin","/user/login",
+                "/user/ex","/json","/500",
                 "/index");
     }
     @Bean

@@ -1,7 +1,5 @@
 package com.liveus.core.user.pojo.entity;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 
@@ -168,20 +166,5 @@ public class UserEntity implements Serializable {
                 ", email='" + email + '\'' +
                 ", publicemail='" + publicemail + '\'' +
                 '}';
-    }
-
-    /**
-    * @Desc:  生成token
-    * @author: shenliqiang
-    * @Time: 2019/11/8 11:28
-    * @param user
-    * @return
-    */
-
-    public String getToken() {
-        String token="";
-        token= JWT.create().withAudience(this.getId().toString())
-                .sign(Algorithm.HMAC256(this.getPassword()));
-        return token;
     }
 }

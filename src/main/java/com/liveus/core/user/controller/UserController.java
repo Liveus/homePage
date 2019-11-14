@@ -1,9 +1,10 @@
 package com.liveus.core.user.controller;
 
 import com.liveus.common.utils.AESUtils;
+import com.liveus.common.utils.JwtUtils;
 import com.liveus.core.sys.enums.CommonStatus;
 import com.liveus.core.user.pojo.dto.Userdto;
-import com.liveus.common.bean.Configbean2;
+import com.liveus.common.bean.ConfigBean;
 import com.liveus.core.user.pojo.entity.LoginLogEntity;
 import com.liveus.core.user.pojo.entity.UserEntity;
 import com.liveus.core.user.service.LoginLogService;
@@ -11,8 +12,10 @@ import com.liveus.core.user.service.UserService;
 import com.liveus.common.utils.IpDetective;
 import io.swagger.annotations.ApiOperation;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,19 +30,21 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
+    private ConfigBean configBean;
+
+    @Autowired
+    private Environment evn;
+
+    @Autowired
     UserService userService;
 
     @Autowired
     LoginLogService loginLogService;
 
     @Autowired
-    private Configbean2 configbean2;
-
-    @Autowired
     StringRedisTemplate stringRedisTemplate;
 
-    @Value(value = "${spring.datasource.url}")
-    private String url;
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      *登录操作
@@ -49,19 +54,15 @@ public class UserController {
     @CrossOrigin
     @ApiOperation(value = "登陆",httpMethod = "POST",notes = "")
     public Map<String,Object> login(Userdto userdto, HttpSession session, HttpServletRequest request){
-        // 登陆
-        Map<String,Object> map = new HashMap<String,Object>();
+        Map<String,Object> map = new HashMap<>();
         String responseMsg = "";
         if(!userdto.getUserName().equals("") && !userdto.getPassWord().equals("")){
             UserEntity userEntity =new UserEntity(userdto.getUserName(),userdto.getPassWord());
             if(userService.userLoginWithPasswd(userEntity)){
-                // 暂定session
                 userEntity = userService.findUserByUsername(userdto.getUserName());
                 session.setAttribute("user", userEntity);
                 map.put("result","success");
-                // 模拟token
-                map.put("token",userEntity.getToken());
-                // put user
+                map.put("token", JwtUtils.generateToken(userEntity.getId()));
                 map.put("user", userEntity);
                 responseMsg = "login success";
             }else{
@@ -74,7 +75,7 @@ public class UserController {
         }
         // 记录登陆操作
         this.loginLogService.insert(new LoginLogEntity(userdto.getUserName(), AESUtils.AESEncode(userdto.getPassWord())
-        ,responseMsg,IpDetective.getIpAddr(request),"1", Calendar.getInstance().getTime()));
+        ,responseMsg,IpDetective.getIpAddr(request),"1", Calendar.getInstance().getTime(),1));
         return map;
     }
 
@@ -82,16 +83,16 @@ public class UserController {
     @ResponseBody
     @CrossOrigin
     @ApiOperation(value = "登出操作",httpMethod = "GET",notes = "")
-    public CommonStatus logout(){
-        //具体步骤代写
+    public CommonStatus logout(HttpServletRequest httpServletRequest,HttpSession session){
+        String token = httpServletRequest.getHeader("token");
+        UserEntity user = userService.findUserById(JwtUtils.verifyJwt(token).get("userId",Integer.class));
+        session.removeAttribute("user");
+        this.loginLogService.insert(new LoginLogEntity(user.getName(), "","logout success",
+                IpDetective.getIpAddr(httpServletRequest),"1", Calendar.getInstance().getTime(),2));
         return CommonStatus.LOGOUT_OK;
     }
 
-    @RequestMapping("/configBean")
-    public String ConfigBean(){
-        return this.configbean2.toString();
-    }
-
+    // 抛出除0异常
     @RequestMapping(value="/ex")
     @ResponseBody
     public String error(){
@@ -113,6 +114,7 @@ public class UserController {
     }
 
     @AfterReturning()
-    public void doafterReturning(){
+    public void doAfterReturning(){
+        logger.info("afterReturning");
     }
 }

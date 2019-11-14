@@ -33,8 +33,11 @@ public class LoginLogEntity extends BaseEntity {
     @ApiModelProperty(value = "主键")
     private Integer id;
 
-    @ApiModelProperty(value = "登录名")
+    @ApiModelProperty(value = "用户名")
     private String login_name;
+
+    @ApiModelProperty(value = "操作类型")
+    private Integer log_type;
 
     @ApiModelProperty(value = "登陆密码")
     private String login_pass;
@@ -45,11 +48,12 @@ public class LoginLogEntity extends BaseEntity {
     @ApiModelProperty(value = "客户端IP")
     private String client_ip;
 
-    public LoginLogEntity(String login_name, String login_pass, String response, String client_ip, String createBy, Date CreateTime) {
+    public LoginLogEntity(String login_name, String login_pass, String response, String client_ip, String createBy, Date CreateTime,Integer log_type) {
         this.login_name = login_name;
         this.login_pass = login_pass;
         this.response = response;
         this.client_ip = client_ip;
+        this.log_type = log_type;
         super.setCreateBy(createBy);
         super.setCreateTime(CreateTime);
     }

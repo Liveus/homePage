@@ -16,7 +16,7 @@
   </resultMap>
   
   <select id="loginBypasswds" resultType="string">
-    select password from user where  name = #{name}
+    select password from user where binary name = #{name}
   </select>
 
   <select id="selectByUserId" resultType="com.liveus.core.user.pojo.entity.UserEntity" parameterType="integer">
@@ -24,6 +24,6 @@
   </select>
 
   <select id="selectByUsername" resultType="com.liveus.core.user.pojo.entity.UserEntity" parameterType="string">
-    SELECT * FROM user WHERE  name = #{username}
+    SELECT * FROM user WHERE binary name = #{username}
   </select>
 </mapper>
