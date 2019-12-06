@@ -3,6 +3,7 @@ package com.liveus.core.blog.controller;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.liveus.common.annotation.UserLoginToken;
 import com.liveus.common.utils.FtpUtil;
+import com.liveus.common.utils.SFTPUtils;
 import com.liveus.common.utils.UploadUtils;
 import com.liveus.config.FtpConfig;
 import com.liveus.core.blog.pojo.dto.BlogDto;
@@ -12,6 +13,7 @@ import com.liveus.core.user.pojo.vo.BlogVo;
 import com.liveus.core.blog.service.BlogService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
@@ -24,6 +26,9 @@ public class BlogController {
 
     @Resource
     BlogService blogService;
+
+    @Value("${SFTP_IMAGE_BASE_URL}")
+    private String base_url;
 
     /**
      * 上传新blog
@@ -159,7 +164,23 @@ public class BlogController {
     public void downloadHeadImgNew(@RequestParam("remotePath") String remotePath, @RequestParam("fileName") String fileName, @RequestParam("localPath") String localPath) throws IOException {
         FtpConfig ftpConfig = new FtpConfig();
         FtpUtil.pictureDownloadByConfig(ftpConfig, remotePath, fileName, localPath);
-        System.out.println("文件下载成功");
+    }
+
+    /**-----------速度太慢
+     * 上传文件到数据卷,普通用户权限
+     * @param file 上传的文件
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/sftp/upload")
+    public String  customerUploadDocToVolume(@RequestParam("file") MultipartFile file) throws Exception {
+        String bashPath ="/home/python/ftpfile/pic";
+        String picSavePath = "";
+        SFTPUtils sftpUtils = new SFTPUtils();
+        //上传文件，同步
+        String newName = UploadUtils.generateRandomFileName(file.getOriginalFilename());
+        sftpUtils.uploadFile(newName,bashPath+picSavePath,file );
+        return this.base_url+"/"+newName;
     }
 
     /**
