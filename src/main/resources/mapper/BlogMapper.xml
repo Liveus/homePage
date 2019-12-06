@@ -10,7 +10,7 @@
                 #{theme,jdbcType=VARCHAR},
                 #{blogtag,jdbcType=VARCHAR}, #{blogclass,jdbcType=VARCHAR}, #{blogtype,jdbcType=VARCHAR},
                 #{sourcename,jdbcType=VARCHAR},
-                #{sourcelink,jdbcType=VARCHAR}, #{isfinished,jdbcType=INTEGER}, #{create_by,jdbcType=INTEGER},
+                #{sourcelink,jdbcType=VARCHAR}, #{isfinished,jdbcType=INTEGER}, #{createBy,jdbcType=INTEGER},
                 sysdate())
     </insert>
 
@@ -58,7 +58,7 @@
                 and FIND_IN_SET(#{item},blogClass)
             </foreach>
         </if>
-        order by create_time
+        order by create_time desc
     </select>
 
     <!--获取blog's title-->

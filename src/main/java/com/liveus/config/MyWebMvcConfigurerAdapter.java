@@ -19,6 +19,9 @@ public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //通过addResourceHandler添加映射路径，然后通过addResourceLocations来指定路径。
         registry.addResourceHandler("/my/**").addResourceLocations("classpath:/my/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/public/**").addResourceLocations("classpath:/public/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
     }
 
     /**
@@ -26,12 +29,27 @@ public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
     * @author: shenliqiang
     * @Time: 2019/11/6 10:18
     * @param registry
-    * @return
+    * @return:
     */
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/user/toLogin").setViewName("login");
+    }
+
+    /**
+    * @Desc: cros配置
+    * @author: shenliqiang
+    * @Time: 2019/11/29 16:17
+    * @param:
+    * @return:
+    */
+
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfig());
+        return new CorsFilter(source);
     }
 
     private CorsConfiguration corsConfig() {
@@ -43,13 +61,6 @@ public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
         corsConfiguration.setMaxAge(3600L);
         return corsConfiguration;
     }
-    @Bean
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfig());
-        return new CorsFilter(source);
-    }
-
     /**
      * 拦截器
      * @param registry
@@ -59,7 +70,8 @@ public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
         // addPathPatterns 用于添加拦截规则
         // excludePathPatterns 用户排除拦截
         registry.addInterceptor(myInterceptor()).addPathPatterns("/**").excludePathPatterns(
-                "/**/*.png", "/**/*.jpg", "/**/*.jpeg","/**/*.txt",
+//                "/*.png", "/*.jpg", "/*.jpeg","/*.txt",
+//                "/**/*.png", "/**/*.jpg", "/**/*.jpeg","/**/*.txt",
                 "/user/toLogin","/user/login",
                 "/user/ex","/json","/500",
                 "/index");

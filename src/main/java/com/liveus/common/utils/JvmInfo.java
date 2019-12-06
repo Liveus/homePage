@@ -343,9 +343,9 @@ public class JvmInfo {
                 user = user.substring(0, user.indexOf("%"));
                 system = system.substring(0, system.indexOf("%"));
                 nice = nice.substring(0, nice.indexOf("%"));
-                float userUsage = new Float(user).floatValue();
-                float systemUsage = new Float(system).floatValue();
-                float niceUsage = new Float(nice).floatValue();
+                float userUsage = Float.parseFloat(user);
+                float systemUsage = Float.parseFloat(system);
+                float niceUsage = Float.parseFloat(nice);
                 return String.valueOf((userUsage + systemUsage + niceUsage) / 100);
             } else {
                 brStat.readLine();

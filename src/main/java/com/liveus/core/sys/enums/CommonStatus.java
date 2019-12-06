@@ -5,8 +5,6 @@ package com.liveus.core.sys.enums;
  * @Desc: HTTP codes
  * @author: Lenovo
  * @Time: 2019/10/18 16:31
- * @Copyright: © 2018 杭州凯立通信有限公司 版权所有
- * @Warning: 本内容仅限于公司内部传阅, 禁止外泄或用于其它商业目的
  */
 public enum  CommonStatus implements  RestStatus {
 
@@ -23,7 +21,11 @@ public enum  CommonStatus implements  RestStatus {
     UPDATE_OK(200,"Update success"),
     UPDATE_FAILED(500,"Update failed"),
     DELETE_OK(200,"Delete success"),
-    DELETE_FAILED(500,"Delete failed")
+    DELETE_FAILED(500,"Delete failed"),
+
+    //
+    FILE_NOT_EXIST(500,"file doesn't exist"),
+    FILE_UPLOAD_OK(200,"file upload success")
     ;
 
     private final int value;

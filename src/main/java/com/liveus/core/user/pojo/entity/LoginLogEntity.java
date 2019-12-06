@@ -18,8 +18,7 @@ import java.util.Date;
  * @Desc: 登录日志
  * @author: Lenovo
  * @Time: 2019/11/7 16:58
- * @Copyright: © 2018 杭州凯立通信有限公司 版权所有
- * @Warning: 本内容仅限于公司内部传阅, 禁止外泄或用于其它商业目的
+
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

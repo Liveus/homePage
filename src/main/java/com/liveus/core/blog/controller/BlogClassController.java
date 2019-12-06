@@ -25,7 +25,7 @@ public class BlogClassController {
     @PostMapping(value = "/newClass")
     @ApiOperation(value = "增加分类专栏",httpMethod = "POST",notes = "增加分类专栏")
     @ApiParam(name = "newType",value = "新类型",required = true)
-    @CrossOrigin
+
     public String addNewType(@RequestParam String newType){
         int result = blogClassService.addNewType(newType);
         if(result==1){
@@ -38,7 +38,7 @@ public class BlogClassController {
     @ResponseBody
     @GetMapping(value = "/getAll")
     @ApiOperation(value = "获取所有分类专栏",httpMethod = "GET",notes = "增加分类专栏")
-    @CrossOrigin
+
     public List<BlogtypeVo> getAllTypes(){
         return this.blogClassService.getAllType();
     }

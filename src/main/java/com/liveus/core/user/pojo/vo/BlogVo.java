@@ -3,14 +3,15 @@ package com.liveus.core.user.pojo.vo;
 import com.liveus.common.bean.BaseVo;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @Desc: blog vo
  * @author: Lenovo
  * @Time: 2019/11/1 10:25
- * @Copyright: © 2018 杭州凯立通信有限公司 版权所有
- * @Warning: 本内容仅限于公司内部传阅, 禁止外泄或用于其它商业目的
+
  */
+@EqualsAndHashCode(callSuper=false)
 @Data
 @ApiModel("blog列表VO")
 public class BlogVo extends BaseVo {

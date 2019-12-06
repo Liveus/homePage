@@ -4,7 +4,7 @@ import com.liveus.common.utils.AESUtils;
 import com.liveus.common.utils.JwtUtils;
 import com.liveus.core.sys.enums.CommonStatus;
 import com.liveus.core.user.pojo.dto.Userdto;
-import com.liveus.common.bean.ConfigBean;
+import com.liveus.config.ConfigBean;
 import com.liveus.core.user.pojo.entity.LoginLogEntity;
 import com.liveus.core.user.pojo.entity.UserEntity;
 import com.liveus.core.user.service.LoginLogService;
@@ -51,7 +51,7 @@ public class UserController {
      **/
     @PostMapping(value = "/login")
     @ResponseBody
-    @CrossOrigin
+
     @ApiOperation(value = "登陆",httpMethod = "POST",notes = "")
     public Map<String,Object> login(Userdto userdto, HttpSession session, HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
@@ -81,7 +81,7 @@ public class UserController {
 
     @GetMapping(value = "/logout")
     @ResponseBody
-    @CrossOrigin
+
     @ApiOperation(value = "登出操作",httpMethod = "GET",notes = "")
     public CommonStatus logout(HttpServletRequest httpServletRequest,HttpSession session){
         String token = httpServletRequest.getHeader("token");

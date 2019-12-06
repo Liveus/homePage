@@ -23,7 +23,7 @@ public class JvmController {
 
     @GetMapping("/jvmInfo")
     @ResponseBody
-    @CrossOrigin
+
     @ApiOperation(value = "获取jvm参数",httpMethod = "GET",notes = "")
     public JSONObject getJvmInfo(){
         JSONObject jsonObject = new JSONObject();
