@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@SpringBootTest
-@RunWith(SpringJUnit4ClassRunner.class)
+//@SpringBootTest
+//@RunWith(SpringJUnit4ClassRunner.class)
 public class TestRabbitMQ {
 
     @Autowired
@@ -18,7 +18,7 @@ public class TestRabbitMQ {
     /**
      * string传输
      */
-    @Test
+    //@Test
     public void testRabbit() {
         for(int i=0;i<50;i++){
             helloSender.send("hellomsg:"+i);
@@ -28,7 +28,7 @@ public class TestRabbitMQ {
     /**
      * 实体类传输
      */
-    @Test
+    //@Test
     public void testObj() {
         for(int i=0;i<10;i++){
             Blog blog = new Blog();
@@ -40,7 +40,7 @@ public class TestRabbitMQ {
     /**
      * g广播测试
      */
-    @Test
+    //@Test
     public void Testbroader(){
         helloSender.send();
     }
