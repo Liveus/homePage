@@ -41,7 +41,7 @@ public class FtpConfig {
      * 下载地址地基础url
      */
     @Value("${IMAGE_BASE_URL}")
-    private String IMAGE_BASE_URL = "http://140.82.20.82/pic";
+    private String IMAGE_BASE_URL = "http://140.82.20.82:81/pic";
 
     public FtpConfig() {
 
