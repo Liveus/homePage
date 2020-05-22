@@ -26,6 +26,7 @@
 	</properties>
 
 	<dependencies>
+
 		<!--thymeleaf-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

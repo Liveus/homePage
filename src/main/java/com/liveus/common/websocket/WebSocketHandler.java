@@ -3,7 +3,6 @@ package com.liveus.common.websocket;
 import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.AbstractWebSocketHandler;
 
-import javax.websocket.Session;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Map;

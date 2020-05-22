@@ -1,6 +1,5 @@
 package com.liveus.core.user.pojo.dto;
 
-import jdk.jfr.DataAmount;
 import lombok.Data;
 
 /**

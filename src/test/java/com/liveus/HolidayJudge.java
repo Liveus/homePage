@@ -7,12 +7,14 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @Desc: 判断是否是周末或者节假日
@@ -219,5 +221,15 @@ public class HolidayJudge {
             }
         }
         return 5;
+    }
+
+
+    @Test
+    public void SynchronizedListTest(){
+        List<String> list = Collections.synchronizedList(new ArrayList<>());
+
+        CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
+        copyOnWriteArrayList.add("1");
+        copyOnWriteArrayList.remove("1");
     }
 }

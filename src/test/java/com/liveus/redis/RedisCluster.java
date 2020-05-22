@@ -1,4 +1,4 @@
-package com.liveus;
+package com.liveus.redis;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -4,6 +4,7 @@ import com.liveus.core.user.pojo.vo.BlogtypeVo;
 import com.liveus.core.blog.service.BlogClassService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

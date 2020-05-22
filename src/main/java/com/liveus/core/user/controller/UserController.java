@@ -51,7 +51,6 @@ public class UserController {
      **/
     @PostMapping(value = "/login")
     @ResponseBody
-
     @ApiOperation(value = "登陆",httpMethod = "POST",notes = "")
     public Map<String,Object> login(Userdto userdto, HttpSession session, HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
@@ -62,7 +61,7 @@ public class UserController {
                 userEntity = userService.findUserByUsername(userdto.getUserName());
                 session.setAttribute("user", userEntity);
                 map.put("result","success");
-                map.put("token", JwtUtils.generateToken(userEntity.getId()));
+                map.put("userId", JwtUtils.generateToken(userEntity.getId()));
                 map.put("user", userEntity);
                 responseMsg = "login success";
             }else{
@@ -81,7 +80,6 @@ public class UserController {
 
     @GetMapping(value = "/logout")
     @ResponseBody
-
     @ApiOperation(value = "登出操作",httpMethod = "GET",notes = "")
     public CommonStatus logout(HttpServletRequest httpServletRequest,HttpSession session){
         String token = httpServletRequest.getHeader("token");

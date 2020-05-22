@@ -3,6 +3,7 @@ package com.liveus.core.analyze.service.impl;
 import com.liveus.common.utils.JvmUtils;
 import com.liveus.core.analyze.service.JvmService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 

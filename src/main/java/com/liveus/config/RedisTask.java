@@ -26,7 +26,7 @@ public class RedisTask extends KeyExpirationEventMessageListener {
     }
 
     @Override
-    public void onMessage(Message message, byte[] pattern) {
+        public void onMessage(Message message, byte[] pattern) {
         String channel = new String(message.getChannel(), StandardCharsets.UTF_8);
         //过期的key
         String key = new String(message.getBody(), StandardCharsets.UTF_8);

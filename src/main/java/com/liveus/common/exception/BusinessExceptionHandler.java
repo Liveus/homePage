@@ -1,7 +1,6 @@
 package com.liveus.common.exception;
 
 import com.liveus.common.utils.AjaxObject;
-import com.liveus.common.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;

@@ -1,4 +1,4 @@
-package com.liveus;
+package com.liveus.redis;
 
 import redis.clients.jedis.*;
 import java.io.IOException;
