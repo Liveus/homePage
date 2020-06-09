@@ -39,7 +39,6 @@ public class BlogClassController {
     @ResponseBody
     @GetMapping(value = "/getAll")
     @ApiOperation(value = "获取所有分类专栏",httpMethod = "GET",notes = "增加分类专栏")
-
     public List<BlogtypeVo> getAllTypes(){
         return this.blogClassService.getAllType();
     }

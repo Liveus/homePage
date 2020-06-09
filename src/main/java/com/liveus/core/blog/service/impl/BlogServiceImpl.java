@@ -61,10 +61,12 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
         for (BlogVo blog:blogs) {
             StringBuilder result = new StringBuilder();
             String[] classes = blog.getBlogclass().split(",");
-            for (String blogClass:classes) {
-                result.append(this.blogClassMapper.selectById(Integer.valueOf(blogClass))).append(",");
+            if(classes.length>1){
+                for (String blogClass:classes) {
+                    result.append(this.blogClassMapper.selectById(Integer.valueOf(blogClass))).append(",");
+                }
+                result.deleteCharAt(result.length()-1);
             }
-            result.deleteCharAt(result.length()-1);
             blog.setBlogclass(result.toString());
         }
         return page.setRecords(blogs);
@@ -80,10 +82,12 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
         Blog blog = blogMapper.getBlogById(id);
         StringBuilder result = new StringBuilder();
         String[] classes = blog.getBlogclass().split(",");
-        for (String blogClass:classes) {
-            result.append(this.blogClassMapper.selectById(Integer.valueOf(blogClass))).append(",");
+        if(classes.length>1){
+            for (String blogClass:classes) {
+                result.append(this.blogClassMapper.selectById(Integer.valueOf(blogClass))).append(",");
+            }
+            result.deleteCharAt(result.length()-1);
         }
-        result.deleteCharAt(result.length()-1);
         blog.setBlogclass(result.toString());
         return blog;
     }

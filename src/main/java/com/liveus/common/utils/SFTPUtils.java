@@ -25,7 +25,7 @@ public class SFTPUtils {
 
     private final static int DEFAULT_PORT = 22;
     @Value("${SFTP_IP}")
-    private final static String HOST = "140.82.20.82";
+    private final static String HOST = "${SFTP_IP}";
     @Value("${SFTP_PORT}")
     private final static String PORT = "22";
     @Value("${SFTP_USERNAME}")

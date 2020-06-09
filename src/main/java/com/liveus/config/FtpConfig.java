@@ -16,7 +16,7 @@ public class FtpConfig {
      * 获取ip地址
      */
     @Value("${FTP_ADDRESS}")
-    private String FTP_ADDRESS = "140.82.20.82";
+    private String FTP_ADDRESS = "202.182.97.85";
     /**
      * 端口号
      */
@@ -41,7 +41,7 @@ public class FtpConfig {
      * 下载地址地基础url
      */
     @Value("${IMAGE_BASE_URL}")
-    private String IMAGE_BASE_URL = "http://140.82.20.82:81/pic";
+    private String IMAGE_BASE_URL = "http://202.182.97.85:81/pic";
 
     public FtpConfig() {
 

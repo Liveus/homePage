@@ -61,7 +61,7 @@ public class UserController {
                 userEntity = userService.findUserByUsername(userdto.getUserName());
                 session.setAttribute("user", userEntity);
                 map.put("result","success");
-                map.put("userId", JwtUtils.generateToken(userEntity.getId()));
+                map.put("token", JwtUtils.generateToken(userEntity.getId()));
                 map.put("user", userEntity);
                 responseMsg = "login success";
             }else{
