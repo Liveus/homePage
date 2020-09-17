@@ -4,7 +4,6 @@ import com.liveus.core.user.pojo.vo.BlogtypeVo;
 import com.liveus.core.blog.service.BlogClassService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +25,6 @@ public class BlogClassController {
     @PostMapping(value = "/newClass")
     @ApiOperation(value = "增加分类专栏",httpMethod = "POST",notes = "增加分类专栏")
     @ApiParam(name = "newType",value = "新类型",required = true)
-
     public String addNewType(@RequestParam String newType){
         int result = blogClassService.addNewType(newType);
         if(result==1){

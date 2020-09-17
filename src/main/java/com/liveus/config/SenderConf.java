@@ -81,7 +81,7 @@ public class SenderConf {
 
     /**
      * 将队列topic.messages与exchange绑定，binding_key为topic.#,模糊匹配
-     * @param queueMessage
+     * @param queueMessages
      * @param exchange
      * @return
      */

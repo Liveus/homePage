@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liveus.core.practice.mapper.MySQLMapper">
+  <resultMap id="BaseResultMap" type="com.liveus.core.practice.pojo.entity.Explain">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+  </resultMap>
+
+  <select id="explainQuery" parameterType="com.liveus.core.practice.pojo.dto.ExplainDto"
+  resultType="com.liveus.core.practice.pojo.entity.Explain">
+    explain ${sql}
+  </select>
+
+  <select id="optimizerTraceQuery" parameterType="com.liveus.core.practice.pojo.dto.OptimizerTraceDto"
+  resultType="com.liveus.core.practice.pojo.entity.OptimizerTrace">
+    set optimizer_trace = 'enabled=on';
+    select * from blog;
+    select * from information_schema.OPTIMIZER_TRACE;
+    set optimizer_trace = 'enabled=off';
+  </select>
+</mapper>

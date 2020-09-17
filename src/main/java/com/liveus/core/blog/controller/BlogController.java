@@ -142,12 +142,30 @@ public class BlogController {
      * @return:
      */
     @PostMapping("/uploadBlogSource")
-    public String uploadBlogSource(@RequestParam("file") MultipartFile file) throws IOException {
+    public String uploadBlogSource(@RequestParam("file") MultipartFile file) throws Exception {
+        return customerUploadDocToVolume(file);
+/*
         FtpConfig ftpConfig = new FtpConfig();
         String oldName = file.getOriginalFilename();// 获取图片原来的名字
         String picNewName = UploadUtils.generateRandomFileName(oldName);// 通过工具类产生新图片名称，防止重名
         String picSavePath = "/BlogSource";//保存路径
         return  FtpUtil.pictureUploadByConfig(ftpConfig, picNewName, picSavePath, file.getInputStream());// 上传到图片服务器的操作
+*/
+    }
+
+    /**-----------速度太慢
+     * 上传文件到数据卷,普通用户权限
+     * @param file 上传的文件
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/sftp/upload")
+    public String  customerUploadDocToVolume(@RequestParam("file") MultipartFile file) throws Exception {
+        SFTPUtils sftpUtils = new SFTPUtils();
+        //上传文件，同步
+        String newName = UploadUtils.generateRandomFileName(file.getOriginalFilename());
+        sftpUtils.uploadFile(newName,file );
+        return this.base_url+"/"+newName;
     }
 
     /**
@@ -164,23 +182,6 @@ public class BlogController {
     public void downloadHeadImgNew(@RequestParam("remotePath") String remotePath, @RequestParam("fileName") String fileName, @RequestParam("localPath") String localPath) throws IOException {
         FtpConfig ftpConfig = new FtpConfig();
         FtpUtil.pictureDownloadByConfig(ftpConfig, remotePath, fileName, localPath);
-    }
-
-    /**-----------速度太慢
-     * 上传文件到数据卷,普通用户权限
-     * @param file 上传的文件
-     * @return
-     * @throws Exception
-     */
-    @PostMapping("/sftp/upload")
-    public String  customerUploadDocToVolume(@RequestParam("file") MultipartFile file) throws Exception {
-        String bashPath ="/home/python/ftpfile/pic";
-        String picSavePath = "";
-        SFTPUtils sftpUtils = new SFTPUtils();
-        //上传文件，同步
-        String newName = UploadUtils.generateRandomFileName(file.getOriginalFilename());
-        sftpUtils.uploadFile(newName,bashPath+picSavePath,file );
-        return this.base_url+"/"+newName;
     }
 
     /**
