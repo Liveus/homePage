@@ -8,16 +8,37 @@
     <id column="id" jdbcType="INTEGER" property="id" />
   </resultMap>
 
+  <update id="openOptimizerTrace">
+    set optimizer_trace = 'enabled=on'
+  </update>
+
+  <update id="closeOptimizerTrace">
+    set optimizer_trace = 'enabled=off'
+  </update>
+
+  <select id="doQuery" parameterType="com.liveus.core.practice.pojo.dto.OptimizerTraceDto"
+          resultType="com.liveus.core.practice.pojo.entity.OptimizerTrace">
+    ${sql}
+  </select>
+
   <select id="explainQuery" parameterType="com.liveus.core.practice.pojo.dto.ExplainDto"
-  resultType="com.liveus.core.practice.pojo.entity.Explain">
+          resultType="com.liveus.core.practice.pojo.entity.Explain">
     explain ${sql}
   </select>
 
   <select id="optimizerTraceQuery" parameterType="com.liveus.core.practice.pojo.dto.OptimizerTraceDto"
-  resultType="com.liveus.core.practice.pojo.entity.OptimizerTrace">
-    set optimizer_trace = 'enabled=on';
-    select * from blog;
-    select * from information_schema.OPTIMIZER_TRACE;
-    set optimizer_trace = 'enabled=off';
+          resultType="com.liveus.core.practice.pojo.entity.OptimizerTrace">
+    select * from information_schema.OPTIMIZER_TRACE
   </select>
+
+  <select id="selectVariables" parameterType="com.liveus.core.practice.pojo.dto.BaseSQLDto"
+  resultType="com.liveus.core.practice.pojo.entity.Variable">
+    show variables like #{variables}
+  </select>
+
+  <select id="selectIndex" parameterType="com.liveus.core.practice.pojo.dto.IndexDto"
+  resultType="com.liveus.core.practice.pojo.entity.Index">
+    show index from ${table}
+  </select>
+
 </mapper>

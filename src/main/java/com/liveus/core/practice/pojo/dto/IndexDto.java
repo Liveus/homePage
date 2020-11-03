@@ -5,10 +5,11 @@ import lombok.Data;
 /**
  * @Package: com.liveus.core.practice.pojo.dto
  * @Author: shen2
- * @Description: explain 入参
- * @Date: 2020/9/15 15:50
+ * @Description:
+ * @Date: 2020/9/18 14:04
  */
 @Data
-public class ExplainDto extends BaseSQLDto{
+public class IndexDto extends BaseSQLDto {
+    private String table;
 
 }

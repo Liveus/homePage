@@ -9,9 +9,6 @@ import lombok.Data;
  * @Date: 2020/9/15 17:47
  */
 @Data
-public class OptimizerTraceDto {
-    /**
-     * 待分析的sql
-     */
-    private String sql;
+public class OptimizerTraceDto extends BaseSQLDto{
+
 }

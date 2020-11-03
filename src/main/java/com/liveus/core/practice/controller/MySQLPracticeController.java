@@ -2,8 +2,12 @@ package com.liveus.core.practice.controller;
 
 import com.liveus.common.Constant.Constant;
 import com.liveus.common.local.CommonResult;
+import com.liveus.core.practice.pojo.dto.BaseSQLDto;
 import com.liveus.core.practice.pojo.dto.ExplainDto;
+import com.liveus.core.practice.pojo.dto.IndexDto;
 import com.liveus.core.practice.pojo.dto.OptimizerTraceDto;
+import com.liveus.core.practice.pojo.entity.Index;
+import com.liveus.core.practice.pojo.entity.Variable;
 import com.liveus.core.practice.pojo.vo.ExplainVo;
 import com.liveus.core.practice.pojo.vo.OptimizerTraceVo;
 import com.liveus.core.practice.service.MySQLPracticeService;
@@ -42,7 +46,7 @@ public class MySQLPracticeController {
             return CommonResult.getFailure();
         }
     }
-
+    // TODO: 2020/9/18 待完成
     /**
      * 通过optimizerTrace分析sql执行情况
      * @return
@@ -56,5 +60,28 @@ public class MySQLPracticeController {
             return CommonResult.getFailure();
         }
     }
+
+    /**
+     * 查询数据库变量
+     * @param dto 入参
+     * @return 结果
+     */
+    @PostMapping("/selectVariables")
+    public CommonResult selectVariables(@RequestBody BaseSQLDto dto){
+        List<Variable> variables = mySQLPracticeService.selectVariables(dto);
+        return CommonResult.getSuccess(Constant.STATUS_SUCCESS,variables);
+    }
+
+    /**
+     * 查询索引
+     * @param dto
+     * @return
+     */
+    @PostMapping("/selectIndex")
+    public CommonResult selectIndex(@RequestBody IndexDto dto){
+        List<Index> indices = mySQLPracticeService.selectIndex(dto);
+        return CommonResult.getSuccess(Constant.STATUS_SUCCESS,indices);
+    }
+
 
 }

@@ -11,4 +11,11 @@ import lombok.Data;
 @Data
 public class OptimizerTrace {
 
+    private String query;
+
+    private String trace;
+
+    private String MISSING_BYTES_BEYOND_MAX_MEM_SIZE;
+
+    private String INSUFFICIENT_PRIVILEGES;
 }
