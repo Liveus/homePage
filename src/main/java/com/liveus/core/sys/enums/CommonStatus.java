@@ -8,6 +8,9 @@ package com.liveus.core.sys.enums;
  */
 public enum  CommonStatus implements  RestStatus {
 
+    //基本返回
+    SUCCESS(200,"Success"),
+    FAILED(500,"Failed"),
     // 登陆登出
     LOGIN_OK(200,"Login success"),
     LOGIN_ERROR(500,"Login error"),

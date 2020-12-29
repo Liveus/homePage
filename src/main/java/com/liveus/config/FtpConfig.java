@@ -16,7 +16,7 @@ public class FtpConfig {
      * 获取ip地址
      */
     @Value("${FTP_ADDRESS}")
-    private String FTP_ADDRESS = "202.182.97.85";
+    private String FTP_ADDRESS = "139.198.191.204";
     /**
      * 端口号
      */
@@ -31,17 +31,17 @@ public class FtpConfig {
      * 密码
      */
     @Value("${FTP_PASSWORD}")
-    private String FTP_PASSWORD = "shen0410";
+    private String FTP_PASSWORD = "Shen0410.";
     /**
-     * 基本路径
+     * 存放路径
      */
     @Value("${FTP_BASEPATH}")
-    private String FTP_BASEPATH = "/home/python/ftpfile/pic";
+    private String FTP_BASEPATH = "/var/www/html/ftp/";
     /**
      * 下载地址地基础url
      */
     @Value("${IMAGE_BASE_URL}")
-    private String IMAGE_BASE_URL = "http://202.182.97.85:81/pic";
+    private String IMAGE_BASE_URL = "http://139.198.191.204:80/pic";
 
     public FtpConfig() {
 

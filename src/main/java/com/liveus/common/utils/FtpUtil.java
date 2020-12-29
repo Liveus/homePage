@@ -29,7 +29,13 @@ public class FtpUtil {
      */
     public static String pictureUploadByConfig(FtpConfig ftpConfig, String picNewName, String picSavePath, InputStream inputStream) {
         String picHttpPath;
-        boolean flag = uploadFile(ftpConfig.getFTP_ADDRESS(), ftpConfig.getFTP_PORT(), ftpConfig.getFTP_USERNAME(), ftpConfig.getFTP_PASSWORD(), ftpConfig.getFTP_BASEPATH(), picSavePath, picNewName, inputStream);
+        boolean flag = uploadFile(
+                ftpConfig.getFTP_ADDRESS(),
+                ftpConfig.getFTP_PORT(),
+                ftpConfig.getFTP_USERNAME(),
+                ftpConfig.getFTP_PASSWORD(),
+                ftpConfig.getFTP_BASEPATH(),
+                picSavePath, picNewName, inputStream);
         if (!flag) {
             System.out.println("上传失败");
             return "";

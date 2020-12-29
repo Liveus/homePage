@@ -23,15 +23,15 @@ public class SFTPUtils {
      * 默认端口
      */
 
-    private final static int DEFAULT_PORT = 22;
+
     @Value("${SFTP_IP}")
-    private final static String HOST = "${SFTP_IP}";
+    private final static String HOST = "139.198.191.204";
     @Value("${SFTP_PORT}")
-    private final static String PORT = "22";
+    private final static int DEFAULT_PORT = 22;
     @Value("${SFTP_USERNAME}")
     private final static String USER_NAME = "root";
     @Value("${SFTP_PASSWORD}")
-    private final static String PASSWORD = "shen0410";
+    private final static String PASSWORD = "Shen0410.";
 
     /**
      * 服务端保存的文件名
@@ -41,7 +41,8 @@ public class SFTPUtils {
     /**
      * 服务端保存的路径
      */
-    private String remotePath = "/home/python/ftpfile";
+    @Value("${SFTP_BASEPATH}")
+    private String remotePath = "/var/www/html/ftp";
 
     /**
      * 本地文件
@@ -167,11 +168,11 @@ public class SFTPUtils {
     }
 
     @Async("taskExecutor")//异步
-    public void uploadFile(String filename, String filePath, MultipartFile file) throws Exception {
+    public void uploadFile(String filename, MultipartFile file) throws Exception {
         try {
             connect();
-            if (!isEmpty( filePath )) {
-                createDir( filePath );
+            if (!isEmpty( remotePath )) {
+                createDir( remotePath );
             }
             sftp.put( file.getInputStream(), filename );
         }catch (Exception e) {
