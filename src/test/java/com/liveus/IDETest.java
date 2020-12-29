@@ -1,9 +1,17 @@
 package com.liveus;
 
+import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import javax.xml.crypto.Data;
 import java.sql.SQLOutput;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -85,5 +93,40 @@ public class IDETest {
                     ", time=" + time +
                     '}';
         }
+    }
+    public static String handleScoreContent(String scoreContent) {
+        if (Objects.isNull(scoreContent)) {
+            return "";
+        }
+        List<ScoreContent> list =  JSON.parseArray(scoreContent,ScoreContent.class);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (ScoreContent score:list) {
+            if(StringUtils.isNotEmpty(score.getContent())){
+                stringBuilder.append(score.getContent()).append(";");
+            }
+        }
+        return stringBuilder.length()>0?stringBuilder.substring(0, stringBuilder.length() - 1):stringBuilder.toString();
+    }
+
+
+    @Data
+    static class ScoreContent{
+        @ApiModelProperty("id")
+        private String id;
+
+        @ApiModelProperty("评分内容")
+        private String content;
+    }
+
+    public static void main(String[] args) {
+        //System.out.println(handleScoreContent("[{\"id\":\"53177f43bd354aa0b78c02ecb6817c55\",\"content\":\"影响因素2\"}]"));
+        //System.out.println(handleScoreContent("[{\"id\":\"d397871749be4b9197dd69e48af1cec0\",\"content\":\"\"},{\"content\":\"\"}]"));
+        LocalTime localTime = LocalTime.now();
+
+        String[] strs =  "11:20".split(":");
+
+        LocalTime targetTime = LocalTime.of(Integer.parseInt(strs[0]),Integer.parseInt(strs[1]));
+        System.out.println(targetTime.toSecondOfDay()-localTime.toSecondOfDay());
+        System.out.println(targetTime);
     }
 }

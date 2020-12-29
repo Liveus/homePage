@@ -1,6 +1,8 @@
 package com.liveus.common.utils;
 
 
+import org.junit.Test;
+
 import java.io.File;
 import java.util.UUID;
 
@@ -53,5 +55,12 @@ public class UploadUtils {
         //二级目录
         int d2 = (hashCode >> 4) & 0xf;
         return "/" + d1 + "/" + d2;
+    }
+
+    @Test
+    public void test(){
+        int result = 1;
+        String a = "aa";
+        a.hashCode();
     }
 }
